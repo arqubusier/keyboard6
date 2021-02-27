@@ -2,14 +2,6 @@ include <util.scad>
 include <cherrymx.scad>
 include <misc.scad>
 
-module cyl_outer () {
-  cylinder(d=inset_diameter_outer, h=switch_height);
-}
-
-module cyl_inner () {
-  cylinder(d=2, h=switch_height);
-}
-
 module corner_outer_2d() {
   circle(d=inset_diameter_outer);
 }
@@ -35,8 +27,8 @@ module column_rep(n,radius,angle_offset,angle) {
 }
 
 n_columns=6;
-column_y_offsets = [switch_side_outer,4,9,4,4, 1.4*switch_side_outer];
-n_rows = [4,5,5,5,4,1];
+column_y_offsets = [switch_side_outer,4,9,4,4, 4 + switch_side_outer];
+n_rows = [4,5,5,5,4,2];
 switch_space = 0;
 switch_inter_space = switch_side_outer + switch_space;
 
@@ -60,6 +52,9 @@ function Index2ColRow(index, col=0, sum=0) =
             (index <  new_sum ) ?
             [col, index - sum] : Index2ColRow(index, col+1, new_sum);
 
+/**
+ * Get position of switch at the given index
+ */
 function Index2Pos(index) =
          let(
                 col_row = Index2ColRow(index),
@@ -128,19 +123,6 @@ row1_data = [
   ["cluster_radius", get(row2_data, "cluster_radius") + .51*switch_side_outer],
 ];
 
-row1_bottom_data = [
-  ["offset_y", get(row1_data, "offset_y")],
-  ["offset_x", get(row1_data, "offset_x")],
-  ["offset_z", 0],
-  ["stagger_x", get(row1_data, "stagger_x")],
-  ["stagger_y", get(row1_data, "stagger_y")],
-  ["cols_n", get(row1_data, "cols_n")],
-  ["col_angle", get(row1_data, "col_angle")],
-  ["col_angle_offset", get(row1_data, "col_angle_offset")],
-  ["x_angle", 0],
-  ["cluster_radius", get(row1_data, "cluster_radius")],
-];
-
 
 row3_data = [
   ["offset_y", 1.5],
@@ -180,8 +162,8 @@ side_wall_thick = (switch_side_outer-switch_side_inner)/2;
 
 /*****************************************************************************/
 thumb_x_max = -6;
-thumb_x_min = -58;
-thumb_y_max = Index2Pos(1)[1] - 1*switch_side_outer + 0;
+thumb_x_min = -50;
+thumb_y_max = Index2Pos(1)[1] - 1*switch_side_outer - 12;
 
 insets_y_min_offset = -2*switch_side_outer - 1.5;
 insets_y_min = Index2Pos(19)[1] + insets_y_min_offset;
@@ -267,14 +249,6 @@ module thumbs_extend() {
     children();
   translate([thumb_x_max,insets_pos[7][1],0])
     children();
-}
-
-module thumbs_body_extend() {
-  translate([0,0,outer_height-inset_height_outer+switch_height])
-    thumbs_extend()
-      children();
-  thumbs_extend()
-      children();
 }
 
 module thumbs_body_top() {
@@ -366,7 +340,7 @@ module main_inner() {
       switch_neg_cube();
     translate([0,0,switch_height])
       main_insets()
-        cyl_inner();
+        cylinder(d=2, h=switch_height);
   }
 }
 
@@ -397,9 +371,6 @@ module plate() {
     }
   }
 }
-
-mirror([1,0,0])
-  plate();
 
 /******************************************************************************
 
@@ -522,8 +493,18 @@ module hand_rest() {
 		Full Assembly
 
 /*****************************************************************************/
+module trrs_pos() {
+  translate(insets_pos[1] + [6, -get(trrs_data, "length"), 0])
+    children();
+}
 
-mirror([1,0,0])
+module usbminib_pos() {
+  trrs_pos()
+    translate([14, get(trrs_data, "length") - get(usbminib_data, "length") + get(usbminib_data, "length_narrow"), 0])
+    children();
+}
+
+//mirror([1,0,0])
 difference() {
   union() {
     difference() {
@@ -549,10 +530,18 @@ difference() {
   insets()
       screw_inset_neg();
 
-  trrs();
-  !usbminib();
+  #trrs_pos()
+    trrs();
+  #usbminib_pos()
+    usbminib();
+    translate([get(usbminib_data, "width")/2 - get(usbcable_data, "width")/2, get(usbminib_data, "length"), 0])
+  #usbminib_pos()
+    usbcable();
+
+//mirror([1,0,0])
+//  %plate();
 }
 
-mirror([1,0,0])
-    translate([0,0,-bottom_height])
+//mirror([1,0,0])
+    %translate([0,0,-bottom_height])
         hand_rest();
