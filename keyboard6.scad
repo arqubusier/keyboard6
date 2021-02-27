@@ -548,6 +548,9 @@ difference() {
 
   insets()
       screw_inset_neg();
+
+  trrs();
+  !usbminib();
 }
 
 mirror([1,0,0])
