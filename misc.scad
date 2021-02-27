@@ -23,7 +23,8 @@ inset_diameter = 5.5;
 inset_diameter_outer = inset_diameter+2.5;
 
 corner_radius = inset_diameter_outer/2;
-corner_radius_inner = 0;
+corner_radius_inner = 1;
+corner_diameter_inner = corner_radius_inner*2;
 
 
 module screw_inset() {

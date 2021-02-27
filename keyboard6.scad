@@ -7,7 +7,7 @@ module corner_outer_2d() {
 }
 
 module corner_inner_2d() {
-  circle(d=2);
+  circle(d=corner_radius_inner);
 }
 
 
@@ -161,21 +161,20 @@ side_wall_thick = (switch_side_outer-switch_side_inner)/2;
 		Insets
 
 /*****************************************************************************/
-thumb_x_max = -6;
 thumb_x_min = -50;
 thumb_y_max = Index2Pos(1)[1] - 1*switch_side_outer - 12;
 
 insets_y_min_offset = -2*switch_side_outer - 1.5;
 insets_y_min = Index2Pos(19)[1] + insets_y_min_offset;
+main_x_min = Index2Pos(0)[0] + -switch_side_inner/2 - 4.5;
 insets_pos = [
-  [thumb_x_min,-18,0],
   [thumb_x_min, thumb_y_max, 0],
-  Index2Pos(0) + [-switch_side_inner/2 - 4.5,7.5,0],
-  Index2Pos(3) + [-switch_side_inner/2 - 4.5,5,0],
+  [main_x_min, thumb_y_max,0],
+  [main_x_min, Index2Pos(3)[1] + 5,0],
   Index2Pos(18) + [switch_side_outer/2+7,-4,0],
   Index2Pos(23) + [switch_side_inner/2-1.5,-switch_side_inner,0],
   Index2Pos(19) + [-switch_side_inner/2 + 12, insets_y_min_offset, 0],
-  Index2Pos(19) + [-6*switch_side_inner - 0, insets_y_min_offset, 0],
+  [main_x_min, Index2Pos(19)[1] + insets_y_min_offset, 0],
 ];
 
 module insets() {
@@ -245,9 +244,9 @@ module thumbs_extend() {
     children();
   translate(insets_pos[1])
     children();
-  translate([thumb_x_max,thumb_y_max,0])
+  translate(insets_pos[6])
     children();
-  translate([thumb_x_max,insets_pos[7][1],0])
+  translate(insets_pos[0] + [0,-20,0])
     children();
 }
 
@@ -302,7 +301,7 @@ module thumb_body_outer() {
 
 /*****************************************************************************/
 module main_insets_bottom() {
-  for (pos = [insets_pos[2], insets_pos[3], insets_pos[4], insets_pos[5], insets_pos[6], insets_pos[7]] ) {
+  for (pos = [insets_pos[1], insets_pos[2], insets_pos[3], insets_pos[4], insets_pos[5], insets_pos[6]] ) {
     translate(pos) {
       children();
     }
@@ -392,7 +391,7 @@ module dove_tail_2d() {
   ]);
 }
 
-dove_tail_pos = [(insets_pos[6][0]+insets_pos[7][0])/2,insets_y_min - inset_diameter_outer/2+.1,0];
+dove_tail_pos = [(insets_pos[5][0]+insets_pos[6][0])/2,insets_y_min - inset_diameter_outer/2+.1,0];
 module dove_tail() {
   translate(dove_tail_pos) {
     linear_extrude(height=dove_tail_height) {
@@ -443,8 +442,8 @@ module hand_rest() {
   corner_diam = 7;
 
   depth = 70;
-  ne =  insets_pos[6] + [switch_side_outer, -inset_diameter_outer - .2, 0];
-  nw =  insets_pos[7] + [-5, -inset_diameter_outer - .2, 0];
+  ne =  insets_pos[5] + [switch_side_outer, -inset_diameter_outer - .2, 0];
+  nw =  insets_pos[6] + [-5, -inset_diameter_outer - .2, 0];
   w =  nw + [0, -30, 0];
   sw = nw + [25, -depth, 0];
   se = ne + [0, -depth, 0];
@@ -494,7 +493,7 @@ module hand_rest() {
 
 /*****************************************************************************/
 module trrs_pos() {
-  translate(insets_pos[1] + [6, -get(trrs_data, "length"), 0])
+  translate(insets_pos[0] + [6,corner_radius_inner  -get(trrs_data, "length"), 0])
     children();
 }
 
