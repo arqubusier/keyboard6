@@ -389,20 +389,11 @@ module plate() {
 
                         main_insets_bottom()
                             corner_outer_2d();
-
-                        for (p = box_insets) {
-                            #translate(p)
-                                corner_outer_2d();
-                        }
                     }
                 }
              }
             insets()
                 screw_hole();
-            for (p = box_insets) {
-                translate(p)
-                    screw_hole();
-            }
             
             %usb_bmini_pos()
                 usb_holder_screws(usb_bmini_data)
@@ -537,166 +528,6 @@ module hand_rest() {
     }
 }
 
-
-
-/******************************************************************************
-
-		Misc
-
-/*****************************************************************************/
-controller_width=22;
-controller_length=53;
- controller_height=25;
-module controller_clearance() {
-    cube([controller_width, controller_length, controller_height]);
-}
-
-module controller_pos() {
-    translate([14,-11,0])
-        rotate([0,0,-90])
-            children();
-}
-
-module controller_cover() {
-    box_top_thick = 1;
-    bot_thick_max = 2;
-    bot_thick_min = 1;
-    cover_top_height = 2;//controller_height - (outer_height + switch_height) + box_top_thick;
-    overhang = 2;
-
-    text_height = 10;
-    text_depth = .5;
-
-    difference() {
-        union() {
-            translate([-overhang/2, -overhang/2,0])
-            cube([controller_width + overhang, controller_length + overhang, cover_top_height]);
-            translate([0, 0, -switch_height])
-                hull() {
-                    translate([0, 0, switch_height - 1.5])
-                        cube([controller_width, controller_length, 1.5]);
-                    translate([bot_thick_min/2, bot_thick_min/2, 0])
-                        cube([controller_width - bot_thick_min, controller_length - bot_thick_min, 0.1]);
-                }
-        }
-        translate([bot_thick_max/2, bot_thick_max/2, -switch_height-box_top_thick])
-        cube([controller_width - bot_thick_max, controller_length - bot_thick_max,
-                                cover_top_height + switch_height]);
-        // text
-        translate([0, 0, cover_top_height-text_depth]) {
-            linear_extrude (1) {
-            rotate([0,0,90]) {
-                translate([2, -text_height/3 - controller_width/2, 0]) {
-                    text("grapto", font="Liberation Mono:style=Bold",size=text_height, halign=50);
-                }
-            }
-            }
-        }
-    }
-
-}
-
-/******************************************************************************
-
-		Controller box
-
-/*****************************************************************************/
-devboard_length = 37.5;
-jack_nut_max = 12;
-jack_width = 8.5;
-box_front_thick = 2;
-box_side_thick = 2;
-box_top_thick = 1;
-box_length = box_front_thick + devboard_length + 5 + jack_nut_max + corner_radius;
-box_width = 18.5 + 4*corner_radius;
-box_height = 30;
-box_offset = insets_pos[2] + [-box_width/2-corner_radius,.5-corner_radius,0];
-
-box_insets_rel_half = [
-  [box_width/2 - corner_radius, corner_radius, 0],
-  [box_width/2 - corner_radius, box_length - corner_radius, 0],
-  ];
-box_insets = [
-  box_insets_rel_half[0] + box_offset,
-  box_insets_rel_half[1] + box_offset,
-  [-box_insets_rel_half[0][0], box_insets_rel_half[0][1], box_insets_rel_half[0][2]] + box_offset,
-  [-box_insets_rel_half[1][0], box_insets_rel_half[1][1], box_insets_rel_half[1][2]] + box_offset,
-  ];
-
-module controller_box_half() {
-  difference() {
-    union () {
-    difference () {
-      linear_extrude(height=box_height)
-        hull() {
-            square([1,box_length]);
-            translate([box_width/2 - corner_radius, box_length - corner_radius, 0])
-              corner_outer_2d();
-            translate([box_width/2 - corner_radius, 0, 0])
-              square(corner_radius);
-      }
-
-      linear_extrude(height=box_height - box_top_thick)
-        hull() {
-            translate([0, box_front_thick, 0])
-              square([1, box_length-2*box_front_thick]);
-            translate([box_width/2 - 1 - box_side_thick, box_length - box_front_thick - 1, 0])
-              square(1);
-            translate([box_width/2 - 1 - box_side_thick, box_front_thick, 0])
-              square(1);
-        }
-      }
-
-      for ( p = box_insets_rel_half ) {
-          translate(p)
-              screw_inset_pos();
-      }
-    }
-
-
-    connector_clearence_h = 10;
-    connector_clearence_w = 12;
-    cube([5, box_front_thick, 8]);
-    #translate([0, box_length - box_front_thick, box_height - box_top_thick - connector_clearence_h - 3.2])
-      cube([connector_clearence_w/2, box_front_thick, connector_clearence_h]);
-
-    for ( p = box_insets_rel_half ) {
-        translate(p)
-            screw_inset_neg();
-    }
-  }
-
-  translate([0, 0, box_height - inset_height_outer - box_top_thick]) {
-    translate([box_width/2 - corner_radius, box_length - box_front_thick - devboard_length + corner_radius])
-        screw_inset_pos();
-
-    translate([0, box_length - 2 - box_front_thick - devboard_length])
-        cube([2,4,inset_height_outer]);
-  }
-
-}
-
-module controller_box() {
-  difference() {
-    union() {
-      controller_box_half();
-      mirror([1,0,0])
-        controller_box_half();
-    }
-    translate([box_width/2 - box_side_thick, 2*corner_radius + jack_nut_max/2 + 2, jack_nut_max/2 + 1]) {
-      rotate([0,90,0])
-        cylinder(d=jack_width, h=box_side_thick);
-    }
-    translate([-box_width/2, 2*corner_radius + jack_nut_max/2, 0]) {
-        cube(8);
-    }
-  }
-}
-
-mirror([1,0,0])
-    translate(box_offset)
-        controller_box();
-
 /******************************************************************************
 
 		Full Assembly
@@ -734,19 +565,6 @@ usb_a_pos()
 
 usb_bmini_pos()
     usb_hole(usb_bmini_data);
-
-translate([14,-11,0])
-    rotate([0,0,-90])
-        controller_clearance();
-
-controller_pos()
-    controller_clearance();
-}
-
-
-!translate([0,0,outer_height + switch_height]) {
-    controller_pos()
-        controller_cover();
 }
 
 mirror([1,0,0])
