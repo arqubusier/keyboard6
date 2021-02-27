@@ -70,87 +70,26 @@ function Index2Pos(index) =
 		Thumb Cluster patterns
 
 /*****************************************************************************/
-module ClusterRow(cluster_row_data) {
-  for (col = [0:get(cluster_row_data, "cols_n") - 1]) {
-    translate([get(cluster_row_data, "offset_x"),
-               get(cluster_row_data, "offset_y"),
-               get(cluster_row_data, "offset_z") ]) {
-      x = col*(-get(cluster_row_data, "stagger_x"));
-      y = -get(cluster_row_data, "cluster_radius") + col*(-get(cluster_row_data, "stagger_y"));
-      translate([x, y, 0]) {
-        angle = col * get(cluster_row_data, "col_angle") + get(cluster_row_data, "col_angle_offset");
-        rotate([0,0,angle])
-            translate([0, get(cluster_row_data, "cluster_radius"), 0])
-                rotate([get(cluster_row_data, "x_angle"),0,0])
-        children();
-      }
+module thumb_pattern() {
+  radius = 80;
+  angle_off = 15;
+  angle_sep = 14;
+  translate([radius*sin(angle_off), -radius*cos(angle_off) - 1.5,0])
+    for (i = [0:2]) {
+      rotate([0, 0, angle_off + i*angle_sep])
+        translate([0, radius, 0])
+          children();
     }
-  }
 }
 
-
+#thumb_pattern()
+  switch_neg(1);
 
 /******************************************************************************
 
 		Common parameters
 
 /*****************************************************************************/
-x_offset = 25;
-
-row2_data = [
-  ["offset_y", 1],
-  ["offset_x", x_offset-.5],
-  ["offset_z", 0],
-  ["stagger_x", 5],
-  ["stagger_y", 5],
-  ["cols_n", 1],
-  ["col_angle", 0],
-  ["col_angle_offset", 15],
-  ["x_angle", 0],
-  ["cluster_radius", 100],
-];
-
-row1_data = [
-  ["offset_y", 7.5+switch_side_outer],
-  ["offset_x", x_offset + 8.5],
-  ["offset_z", 0],
-  ["stagger_x", switch_side_outer - 2.5],
-  ["stagger_y", switch_side_outer - 9.5],
-  ["cols_n", 2],
-  ["col_angle", 0],
-  ["col_angle_offset", 30.5],
-  ["x_angle", 0],
-  ["cluster_radius", get(row2_data, "cluster_radius") + .51*switch_side_outer],
-];
-
-
-row3_data = [
-  ["offset_y", 1.5],
-  ["offset_x", x_offset-.5],
-  ["stagger_offset_x", switch_side_outer],
-  ["offset_z", 0],
-  ["stagger_x", switch_side_outer - 2.5],
-  ["stagger_y", switch_side_outer - 9.5],
-  ["cols_n", 2],
-  ["col_angle", 0],
-  ["col_angle_offset", 30.5],
-  ["x_angle", 0],
-  ["cluster_radius", get(row2_data, "cluster_radius") - .51*switch_side_outer],
-];
-
-row3_bottom_data = [
-  ["offset_y", get(row3_data, "offset_y")],
-  ["offset_x", get(row3_data, "offset_x")],
-  ["offset_z", 0],
-  ["stagger_x", get(row3_data, "stagger_x")],
-  ["stagger_y", get(row3_data, "stagger_y")],
-  ["cols_n", get(row3_data, "cols_n")],
-  ["col_angle", get(row1_data, "col_angle")],
-  ["col_angle_offset", get(row3_data, "col_angle_offset")],
-  ["x_angle", 0],
-  ["cluster_radius", get(row3_data, "cluster_radius")],
-];
-
 outer_height = 10;
 
 side_wall_thick = (switch_side_outer-switch_side_inner)/2;
@@ -192,9 +131,6 @@ module insets() {
 /*****************************************************************************/
 module main_pattern() {
   rotate([0,0,0]) {
-    ClusterRow(row2_data)
-      children();
-
       main()
         children();
 
@@ -252,7 +188,7 @@ module thumbs_extend() {
 
 module thumbs_body_top() {
   translate([0,0,outer_height]) {
-    ClusterRow(row3_data)
+    thumb_pattern()
       children();
   }
 }
@@ -267,7 +203,7 @@ module thumb_trim() {
 module thumbs_plate_inner() {
   hull() {
     //thumbs
-    ClusterRow(row3_bottom_data)
+    thumb_pattern()
       SwitchNeg2D();
     thumbs_extend()
       corner_inner_2d();
@@ -276,8 +212,7 @@ module thumbs_plate_inner() {
 
 module thumbs_plate() {
   hull() {
-    //thumbs
-    ClusterRow(row3_bottom_data)
+    thumb_pattern()
       SwitchPos2D();
     thumbs_extend()
       corner_outer_2d();
