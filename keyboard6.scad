@@ -2,12 +2,41 @@ include <util.scad>
 include <cherrymx.scad>
 include <misc.scad>
 
+/******************************************************************************
+
+		Common parameters
+
+/*****************************************************************************/
+inner_height = 10;
+outer_height = inner_height + switch_height;
+
+side_wall_thick = (switch_side_outer-switch_side_inner)/2;
+// board clearance is measured from the switch hole
+board_clearance = 1;
+corner_diam_inner = inset_diameter_outer + 2*board_clearance - 2*side_wall_thick;
+corner_diam_outer = inset_diameter_outer;
+echo(side_wall_thick);
+echo(inset_diameter_outer);
+echo(corner_diam_inner);
+
 module corner_outer_2d() {
-  circle(d=inset_diameter_outer);
+  circle(d=corner_diam_outer);
 }
 
 module corner_inner_2d() {
-  circle(d=corner_radius_inner);
+  circle(d=corner_diam_inner);
+}
+
+module switch_outer() {
+  side = switch_side_inner + board_clearance + side_wall_thick;
+  translate([0, 0, switch_height/2])
+    cube([side, side, switch_height], center=true);
+}
+
+module switch_inner() {
+  side = switch_side_inner + board_clearance;
+  translate([0, 0, switch_height/2])
+    cube([side, side, switch_height], center=true);
 }
 
 
@@ -85,15 +114,6 @@ module thumb_pattern() {
 #thumb_pattern()
   switch_neg(1);
 
-/******************************************************************************
-
-		Common parameters
-
-/*****************************************************************************/
-outer_height = 10;
-
-side_wall_thick = (switch_side_outer-switch_side_inner)/2;
-
 
 /******************************************************************************
 
@@ -123,30 +143,6 @@ module insets() {
   }
 }
 
-
-/******************************************************************************
-
-		Main Assembly
-
-/*****************************************************************************/
-module main_pattern() {
-  rotate([0,0,0]) {
-      main()
-        children();
-
-      translate(Index2Pos(19) + [1*switch_side_outer, -1.8*switch_side_outer, 0])
-        children();
-   }
-}
-
-module main_body() {
-  translate([0,0,outer_height])
-    main_pattern()
-    children();
-
-  main_pattern()
-  children();
-}
 
 /******************************************************************************
 
@@ -187,13 +183,13 @@ module thumbs_extend() {
 }
 
 module thumbs_body_top() {
-  translate([0,0,outer_height]) {
+  translate([0,0,inner_height]) {
     thumb_pattern()
       children();
   }
 }
 
-module thumb_trim() {
+module thumb_holes() {
   thumbs_body_top() {
     switch_neg(5);
   }
@@ -222,19 +218,38 @@ module thumbs_plate() {
 module thumb_body_inner() {
   trim = 1;  
   translate([0,0,-trim])
-    linear_extrude(height=outer_height + trim)
+    linear_extrude(height=inner_height + trim)
       thumbs_plate_inner();
 }
 
 module thumb_body_outer() {
-  linear_extrude(height=outer_height + switch_height)
+  linear_extrude(height=inner_height + switch_height)
     thumbs_plate();
 }
+
 /******************************************************************************
 
 		Main Assembly
 
 /*****************************************************************************/
+module main_pattern() {
+  rotate([0,0,0]) {
+      main()
+        children();
+
+      translate(Index2Pos(19) + [1*switch_side_outer, -1.8*switch_side_outer, 0])
+        children();
+   }
+}
+
+module main_switches_outline() {
+  translate([0,0,inner_height])
+    main_pattern()
+    children();
+
+  main_pattern()
+  children();
+}
 module main_insets_bottom() {
   for (pos = [insets_pos[1], insets_pos[2], insets_pos[3], insets_pos[4], insets_pos[5], insets_pos[6]] ) {
     translate(pos) {
@@ -242,41 +257,43 @@ module main_insets_bottom() {
     }
   }
 }
-module main_insets() {
+
+module main_insets_outline() {
   main_insets_bottom()
     children();
-  translate([0,0,outer_height - inset_height_outer + switch_height ])
+  translate([0,0,inner_height - inset_height_outer + switch_height])
     main_insets_bottom()
       children();
 }
 
 module main_outer() {
   hull() {
-    main_body()
-      switch_pos();
-      main_insets()
-        screw_inset_pos();
+    main_switches_outline()
+      switch_outer();
+    main_insets_outline()
+      screw_inset_pos();
   }
 
 }
 
-module main_trim() {
-  translate ([0, 0, outer_height]) {
+module main_inner() {
+  hull() {
+    translate([0, 0, -switch_height]) {
+      main_switches_outline()
+        switch_inner();
+      #main_insets_outline()
+      cylinder(d=corner_diam_inner, h=inset_height_outer);
+    }
+  }
+}
+
+module main_holes() {
+  translate ([0, 0, inner_height]) {
     main_pattern()
       switch_neg(5);
   }
 }
 
-module main_inner() {
-  translate([0,0,-switch_height])
-  hull() {
-    main_body()
-      switch_neg_cube();
-    translate([0,0,switch_height])
-      main_insets()
-        cylinder(d=2, h=switch_height);
-  }
-}
 
 /******************************************************************************
 
@@ -318,7 +335,7 @@ dove_tail_sw = [dove_tail_min_side/2, 0];
 dove_tail_ne = [dove_tail_max_side/2, dove_tail_depth];
 dove_tail_nw = [-dove_tail_max_side/2, dove_tail_depth];
 dove_tail_se = [-dove_tail_min_side/2, 0];
-dove_tail_height = outer_height+switch_height;
+dove_tail_height = inner_height+switch_height;
 
 module dove_tail_2d() {
   polygon([
@@ -384,7 +401,7 @@ module hand_rest() {
   se = ne + [0, -depth, 0];
 
   difference() {
-    //linear_extrude(outer_height + switch_height + bottom_height)
+    //linear_extrude(inner_height + switch_height + bottom_height)
     hull() {
       linear_extrude(1) {
         hull()
@@ -393,7 +410,7 @@ module hand_rest() {
               circle(d=corner_diam);
           }
       }
-      translate([0, 0, outer_height + switch_height + bottom_height - corner_diam]) {
+      translate([0, 0, inner_height + switch_height + bottom_height - corner_diam]) {
         translate(nw) {
           cylinder(d=corner_diam, h=corner_diam);
         }
@@ -428,7 +445,7 @@ module hand_rest() {
 
 /*****************************************************************************/
 module trrs_pos() {
-  translate(insets_pos[0] + [6,corner_radius_inner  -get(trrs_data, "length"), 0])
+  translate(insets_pos[0] + [6,corner_diam_inner/2  -get(trrs_data, "length"), 0])
     children();
 }
 
@@ -449,8 +466,10 @@ difference() {
       thumb_body_inner();
       main_inner();
     }
+
     insets()
       screw_inset_pos();
+
     difference() {
       dove_tail()
         dove_tail_2d();
@@ -458,8 +477,8 @@ difference() {
     }
   }
 
-  main_trim();
-  thumb_trim();
+  main_holes();
+  thumb_holes();
 
   insets()
       screw_inset_neg();
@@ -472,10 +491,8 @@ difference() {
   #usbminib_pos()
     usbcable();
 
-//mirror([1,0,0])
-//  %plate();
-}
+  //plate();
 
-//mirror([1,0,0])
-    %translate([0,0,-bottom_height])
-        hand_rest();
+  //translate([0,0,-bottom_height])
+  // hand_rest();
+}
