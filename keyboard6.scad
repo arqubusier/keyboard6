@@ -10,9 +10,11 @@ include <misc.scad>
 inner_height = 10;
 outer_height = inner_height + switch_height;
 
-side_wall_thick = (switch_side_outer-switch_side_inner)/2;
+side_wall_thick = 4;
 // board clearance is measured from the switch hole
-board_clearance = 1;
+board_clearance = 2;
+switch_side_clearance = switch_side_inner + board_clearance;
+switch_side_outline = switch_side_inner + board_clearance + side_wall_thick;
 corner_diam_inner = inset_diameter_outer + 2*board_clearance - 2*side_wall_thick;
 corner_diam_outer = inset_diameter_outer;
 echo(side_wall_thick);
@@ -25,6 +27,16 @@ module corner_outer_2d() {
 
 module corner_inner_2d() {
   circle(d=corner_diam_inner);
+}
+
+module switch_outer_2d() {
+  side = switch_side_inner + board_clearance + side_wall_thick;
+  square(side, center=true);
+}
+
+module switch_inner_2d() {
+  side = switch_side_inner + board_clearance;
+  square(side, center=true);
 }
 
 module switch_outer() {
@@ -76,6 +88,8 @@ module main(col_start=0, col_n=n_columns, row_start=0, row_n=5) {
 
 }
 
+palm_switch_pos = Index2Pos(19) + [1*switch_side_outer, -1.8*switch_side_outer, 0];
+
 function Index2ColRow(index, col=0, sum=0) =
          let (new_sum = sum + n_rows[col])
             (index <  new_sum ) ?
@@ -111,10 +125,6 @@ module thumb_pattern() {
     }
 }
 
-#thumb_pattern()
-  switch_neg(1);
-
-
 /******************************************************************************
 
 		Insets
@@ -125,14 +135,15 @@ thumb_y_max = Index2Pos(1)[1] - 1*switch_side_outer - 12;
 
 insets_y_min_offset = -2*switch_side_outer - 1.5;
 insets_y_min = Index2Pos(19)[1] + insets_y_min_offset;
-main_x_min = Index2Pos(0)[0] + -switch_side_inner/2 - 4.5;
+main_x_min = Index2Pos(0)[0] + -switch_side_inner/2 - inset_diameter_outer/2 - board_clearance;
+main_x_max = palm_switch_pos[0] + switch_side_inner/2 + inset_diameter_outer/2 + board_clearance;
 insets_pos = [
   [thumb_x_min, thumb_y_max, 0],
   [main_x_min, thumb_y_max,0],
   [main_x_min, Index2Pos(3)[1] + 5,0],
-  Index2Pos(18) + [switch_side_outer/2+7,-4,0],
-  Index2Pos(23) + [switch_side_inner/2-1.5,-switch_side_inner,0],
-  Index2Pos(19) + [-switch_side_inner/2 + 12, insets_y_min_offset, 0],
+  Index2Pos(18) + [switch_side_outer/2+14,-1,0],
+  [main_x_max, Index2Pos(23)[1], 0],
+  [main_x_max, palm_switch_pos[1], 0],
   [main_x_min, Index2Pos(19)[1] + insets_y_min_offset, 0],
 ];
 
@@ -198,9 +209,8 @@ module thumb_holes() {
 
 module thumbs_plate_inner() {
   hull() {
-    //thumbs
     thumb_pattern()
-      SwitchNeg2D();
+      switch_inner_2d();
     thumbs_extend()
       corner_inner_2d();
   }
@@ -209,7 +219,7 @@ module thumbs_plate_inner() {
 module thumbs_plate() {
   hull() {
     thumb_pattern()
-      SwitchPos2D();
+      switch_outer_2d();
     thumbs_extend()
       corner_outer_2d();
   }
@@ -237,7 +247,7 @@ module main_pattern() {
       main()
         children();
 
-      translate(Index2Pos(19) + [1*switch_side_outer, -1.8*switch_side_outer, 0])
+      translate(palm_switch_pos)
         children();
    }
 }
