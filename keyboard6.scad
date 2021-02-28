@@ -164,28 +164,6 @@ module insets() {
 		Thumb Cluster Assembly
 
 /*****************************************************************************/
-module usb_a_pos() {
-  pos = [
-    thumb_x_min,
-    Index2Pos(0)[1] - 5,
-    0
-  ];
-  translate(pos)
-    rotate([0,0,90])
-    children();
-}
-
-module usb_bmini_pos() {
-  pos = [
-    Index2Pos(3)[0] - 12,
-    thumb_y_max,
-    0
-    ];
-  translate(pos)
-    children();
-}
-
-
 module thumbs_extend() {
   translate(corners_pos[0])
     children();
@@ -458,16 +436,12 @@ module hand_rest() {
 		Pcb
 
 /*****************************************************************************/
-module trrs_pos() {
-  translate(insets_pos[0] + [6,corner_diam_inner/2  -get(trrs_data, "length"), 0])
-    children();
-}
 
-module usbminib_pos() {
-  translate(corners_pos[7] + [-get(usbminib_data, "width_pcb") - side_wall_thick - 4
-                             , -get(usbminib_data, "length_pcb"), 0])
-    children();
-}
+usbminib_pos = corners_pos[7] + [-get(usbminib_data, "width_pcb") - side_wall_thick - 4
+                                  , -get(usbminib_data, "length") + corner_diam_outer/2, 0];
+usbminib_pcb_pos = usbminib_pos + [0, -0.5, 0];
+
+trrs_pos =  [usbminib_pos[0] - 13, corners_pos[7][1] + corner_diam_outer/2  -get(trrs_data, "length")-get(trrs_data, "ring_length"), 0];
 
 module switch_pcb_2d() {
   square(switch_side_inner, center=true);
@@ -484,22 +458,31 @@ module controller_clearance_2d() {
     controller_clearance_shape_2d();
 }
 
+module pcb_corner_2d() {
+  translate([Index2Pos(0)[0] - switch_side_inner/2, usbminib_pcb_pos[1],0])
+    usbminib_pcb_2d();
+}
+
 module pcb() {
-  #hull() {
+  hull() {
     controller_clearance_2d();
     thumb_pattern()
         switch_pcb_2d();
-    #usbminib_pos() {
+    translate(usbminib_pcb_pos)
       usbminib_pcb_2d();
-    }
+    
+    translate(trrs_pos) 
       trrs_pcb_2d();
-  }
-#hull() {
-  main_pattern()
-  switch_pcb_2d();
-  controller_clearance_2d();
-  }
+      #pcb_corner_2d();
+   }
+   hull() {
+     main_pattern()
+     switch_pcb_2d();
+     controller_clearance_2d();
+      pcb_corner_2d();
+     }
 }
+
 
 /******************************************************************************
 
@@ -507,7 +490,7 @@ module pcb() {
 
 /*****************************************************************************/
 
-//mirror([1,0,0])
+//mirror([1,0,0]) {
 difference() {
   union() {
     difference() {
@@ -535,17 +518,18 @@ difference() {
   insets()
       screw_inset_neg();
 
-  #trrs_pos()
+}
+  translate(trrs_pos)
     trrs();
-  #usbminib_pos()
+  translate(usbminib_pos)
     usbminib();
-    translate([get(usbminib_data, "width")/2 - get(usbcable_data, "width")/2, get(usbminib_data, "length"), 0])
-  #usbminib_pos()
-    usbcable();
+  //  translate([get(usbminib_data, "width")/2 - get(usbcable_data, "width")/2, get(usbminib_data, "length"), 0])
+  //#usbminib_pos()
+  //  usbcable();
 
   //plate();
 
   //translate([0,0,-bottom_height])
   // hand_rest();
-    pcb();
-}
+pcb();
+//}

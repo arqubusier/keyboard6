@@ -54,9 +54,11 @@ usbminib_data = [
   ["width_narrow", 7.7],
   ["diameter", 5.6],
   ["ring_length", 2],
+  ["pad_length", 2.5],
+  ["flange_length", 1.5],
 ];
 module usbminib_(data) {
-  w = get(data, "width");
+  w = get(data, "width_pcb");
   wn = get(data, "width_narrow");
   l = get(data, "length");
   ln_ = get(data, "length_narrow");
@@ -80,7 +82,7 @@ trrs_data = [
     ["ring_length", 2],
   ];
 module trrs_(data) {
-  w = get(data, "width");
+  w = get(data, "width_pcb");
   l = get(data, "length");
   h = get(data, "height");
   cube([w, l, h]);
