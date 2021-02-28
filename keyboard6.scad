@@ -127,7 +127,7 @@ module thumb_pattern() {
 
 /******************************************************************************
 
-		Insets
+		Insets and corners
 
 /*****************************************************************************/
 thumb_x_min = -50;
@@ -139,13 +139,17 @@ main_x_min = Index2Pos(0)[0] + -switch_side_inner/2 - inset_diameter_outer/2 - b
 main_x_max = palm_switch_pos[0] + switch_side_inner/2 + inset_diameter_outer/2 + board_clearance;
 insets_pos = [
   [thumb_x_min, thumb_y_max, 0],
-  [main_x_min, thumb_y_max,0],
+  [main_x_min, thumb_y_max + 9,0],
   [main_x_min, Index2Pos(3)[1] + 5,0],
   Index2Pos(18) + [switch_side_outer/2+14,-1,0],
   [main_x_max, Index2Pos(23)[1], 0],
   [main_x_max, palm_switch_pos[1], 0],
   [main_x_min, Index2Pos(19)[1] + insets_y_min_offset, 0],
 ];
+
+corners_pos = concat( insets_pos,
+                      [[main_x_min, thumb_y_max,0]]
+                       );
 
 module insets() {
   for (pos = insets_pos) {
@@ -183,13 +187,13 @@ module usb_bmini_pos() {
 
 
 module thumbs_extend() {
-  translate(insets_pos[0])
+  translate(corners_pos[0])
     children();
-  translate(insets_pos[1])
+  translate(corners_pos[7])
     children();
-  translate(insets_pos[6])
+  translate(corners_pos[6])
     children();
-  translate(insets_pos[0] + [0,-20,0])
+  translate(corners_pos[0] + [0,-20,0])
     children();
 }
 
@@ -261,7 +265,7 @@ module main_switches_outline() {
   children();
 }
 module main_insets_bottom() {
-  for (pos = [insets_pos[1], insets_pos[2], insets_pos[3], insets_pos[4], insets_pos[5], insets_pos[6]] ) {
+  for (pos = [corners_pos[1], corners_pos[2], corners_pos[3], corners_pos[4], corners_pos[5], corners_pos[6], corners_pos[7]] ) {
     translate(pos) {
       children();
     }
@@ -451,7 +455,7 @@ module hand_rest() {
 
 /******************************************************************************
 
-		Full Assembly
+		Pcb
 
 /*****************************************************************************/
 module trrs_pos() {
@@ -460,10 +464,48 @@ module trrs_pos() {
 }
 
 module usbminib_pos() {
-  trrs_pos()
-    translate([14, get(trrs_data, "length") - get(usbminib_data, "length") + get(usbminib_data, "length_narrow"), 0])
+  translate(corners_pos[7] + [-get(usbminib_data, "width_pcb") - side_wall_thick - 4
+                             , -get(usbminib_data, "length_pcb"), 0])
     children();
 }
+
+module switch_pcb_2d() {
+  square(switch_side_inner, center=true);
+}
+controller_clearance_length = 50;
+controller_clearance_width = 20;
+module controller_clearance_shape_2d() {
+  square([controller_clearance_length, controller_clearance_width]);
+}
+
+module controller_clearance_2d() {
+  translate(Index2Pos(4) + [-switch_side_inner/2,
+                            -switch_side_inner/2 - controller_clearance_width - 8,0])
+    controller_clearance_shape_2d();
+}
+
+module pcb() {
+  #hull() {
+    controller_clearance_2d();
+    thumb_pattern()
+        switch_pcb_2d();
+    #usbminib_pos() {
+      usbminib_pcb_2d();
+    }
+      trrs_pcb_2d();
+  }
+#hull() {
+  main_pattern()
+  switch_pcb_2d();
+  controller_clearance_2d();
+  }
+}
+
+/******************************************************************************
+
+		Full Assembly
+
+/*****************************************************************************/
 
 //mirror([1,0,0])
 difference() {
@@ -505,4 +547,5 @@ difference() {
 
   //translate([0,0,-bottom_height])
   // hand_rest();
+    pcb();
 }

@@ -47,7 +47,9 @@ module screw_inset_neg() {
 usbminib_data = [
   ["height", 3.9 + .3],
   ["width", 7.7 + 2*1.1],
+  ["width_pcb", 8.9 + 2],
   ["length", 5.5 + 2.95 + 1.5/2],
+  ["length_pcb", 9],
   ["length_narrow", 2.95 - 1.5/2],
   ["width_narrow", 7.7],
   ["diameter", 5.6],
@@ -64,11 +66,16 @@ module usbminib_(data) {
     cube([wn, ln_, h]);
 }
 module usbminib() usbminib_(usbminib_data);
+module usbminib_pcb_2d() {
+  square([get(usbminib_data, "width_pcb"), get(usbminib_data, "length_pcb")]);
+}
 
 trrs_data = [
     ["height", 5],
     ["width", 8],
+    ["width_pcb", 9],
     ["length", 12.1],
+    ["length_pcb", 11.3 + 1.2/2],
     ["diameter", 5.6],
     ["ring_length", 2],
   ];
@@ -82,6 +89,9 @@ module trrs_(data) {
         cylinder(d=get(data, "diameter"), h=get(data, "ring_length"));
 }
 module trrs() trrs_(trrs_data);
+module trrs_pcb_2d() {
+  square([get(trrs_data, "width_pcb"), get(trrs_data, "length_pcb")]);
+}
 
 usbcable_data = [
     ["height", 8],
