@@ -12,10 +12,10 @@ outer_height = inner_height + switch_height;
 
 side_wall_thick = 4;
 // board clearance is measured from the switch hole
-board_clearance = 1;
-switch_side_clearance = switch_side_inner + board_clearance;
-switch_side_outline = switch_side_inner + board_clearance + side_wall_thick;
-corner_diam_inner = inset_diameter_outer + 2*board_clearance - 2*side_wall_thick;
+pcb_clearance = .4;
+switch_side_clearance = switch_side_inner + pcb_clearance;
+switch_side_outline = switch_side_inner + pcb_clearance + side_wall_thick;
+corner_diam_inner = inset_diameter_outer + 2*pcb_clearance - 2*side_wall_thick;
 corner_diam_outer = inset_diameter_outer;
 plate_offset = 1.4;
 plate_clearance = .4;
@@ -48,7 +48,7 @@ module switch_outer_2d() {
 }
 
 module switch_inner_2d() {
-  side = switch_side_inner + board_clearance;
+  side = switch_side_inner + pcb_clearance;
   square(side, center=true);
 }
 
@@ -61,13 +61,13 @@ module switch_plate_clearance_2d() {
 }
 
 module switch_outer() {
-  side = switch_side_inner + board_clearance + side_wall_thick;
+  side = switch_side_inner + pcb_clearance + side_wall_thick;
   translate([0, 0, switch_height/2])
     cube([side, side, switch_height], center=true);
 }
 
 module switch_inner() {
-  side = switch_side_inner + board_clearance;
+  side = switch_side_inner + pcb_clearance;
   translate([0, 0, switch_height/2])
     cube([side, side, switch_height], center=true);
 }
@@ -151,13 +151,13 @@ module thumb_pattern() {
 		Insets and corners
 
 /*****************************************************************************/
-thumb_x_min = -50;
+thumb_x_min = -47.5;
 thumb_y_max = Index2Pos(1)[1] - 1*switch_side_outer - 12;
 
 insets_y_min_offset = -2*switch_side_outer - 1.5;
 insets_y_min = Index2Pos(19)[1] + insets_y_min_offset;
-main_x_min = Index2Pos(0)[0] + -switch_side_inner/2 - inset_diameter_outer/2 - board_clearance;
-main_x_max = palm_switch_pos[0] + switch_side_inner/2 + inset_diameter_outer/2 + board_clearance;
+main_x_min = Index2Pos(0)[0] + -switch_side_inner/2 - inset_diameter_outer/2 - pcb_clearance;
+main_x_max = palm_switch_pos[0] + switch_side_inner/2 + inset_diameter_outer/2 + pcb_clearance;
 insets_pos = [
   [thumb_x_min, thumb_y_max, 0],
   [main_x_min, thumb_y_max + 9,0],
@@ -473,6 +473,7 @@ module hand_rest() {
 
 /*****************************************************************************/
 pcb_thick = 1.57;
+pcb_height_clearance = .2;
 pcb_pos = z(outer_height - switch_pcb_to_plate_top-pcb_thick);
 usbminib_pos = corners_pos[7] + [-get(usbminib_data, "width_pcb") - side_wall_thick - 4
                                   , -get(usbminib_data, "length") + corner_diam_outer/2,
@@ -482,47 +483,57 @@ usbminib_pcb_pos = usbminib_pos + [0, -0.5, 0];
 trrs_pos =  [usbminib_pos[0] - 13, corners_pos[7][1] + corner_diam_outer/2  -get(trrs_data, "length")-get(trrs_data, "ring_length"),
              pcb_pos[2]-get(trrs_data, "height")];
 
-module switch_pcb_2d() {
-  square(switch_side_inner, center=true);
+module switch_pcb_2d(clearance=0) {
+  square(switch_side_inner+clearance, center=true);
 }
 controller_clearance_length = 50;
 controller_clearance_width = 20;
-module controller_clearance_shape_2d() {
-  square([controller_clearance_length, controller_clearance_width]);
+module controller_shape_2d(clearance) {
+  square([controller_clearance_length+clearance, controller_clearance_width+clearance]);
 }
 
-module controller_clearance_2d() {
+module controller_2d(clearance) {
   translate(Index2Pos(4) + [-switch_side_inner/2,
                             -switch_side_inner/2 - controller_clearance_width - 8,0])
-    controller_clearance_shape_2d();
+    controller_shape_2d(clearance);
 }
 
-module pcb_corner_2d() {
-  translate([Index2Pos(0)[0] - switch_side_inner/2, usbminib_pcb_pos[1],0])
-    usbminib_pcb_2d();
+corner_pcb_pos = [Index2Pos(0)[0] - switch_side_inner/2, usbminib_pcb_pos[1],0];
+
+module pcb_2d(clearance=0) {
+  hull() {
+    translate(corner_pcb_pos)
+        usbminib_pcb_2d(clearance);
+    thumb_pattern()
+        switch_pcb_2d(clearance);
+    translate(usbminib_pcb_pos)
+        usbminib_pcb_2d(clearance);
+    
+    #translate(trrs_pos - x(clearance/2)) 
+        trrs_pcb_2d(clearance);
+
+    controller_2d(clearance);
+  }
+  hull() {
+    main_pattern()
+        switch_pcb_2d(clearance);
+        controller_2d(clearance);
+    translate(corner_pcb_pos)
+        usbminib_pcb_2d(clearance);
+  }
 }
 
 module pcb() {
   translate(pcb_pos) {
     linear_extrude(height=pcb_thick) {
-      hull() {
-        controller_clearance_2d();
-        thumb_pattern()
-          switch_pcb_2d();
-        translate(usbminib_pcb_pos)
-          usbminib_pcb_2d();
-        
-        translate(trrs_pos) 
-          trrs_pcb_2d();
-          pcb_corner_2d();
-      }
-      hull() {
-        main_pattern()
-        switch_pcb_2d();
-        controller_clearance_2d();
-         pcb_corner_2d();
-      }
+      pcb_2d();
     }
+  }
+}
+
+module pcb_with_clearance() {
+  linear_extrude(height=pcb_pos[2] + pcb_thick + pcb_height_clearance) {
+    pcb_2d(pcb_clearance);
   }
 }
 
@@ -562,6 +573,7 @@ difference() {
       screw_inset_neg();
 
   plate_clearance();
+  pcb_with_clearance();
 }
   translate(trrs_pos)
     trrs();
@@ -575,5 +587,5 @@ difference() {
 
   //translate([0,0,-bottom_height])
   // hand_rest();
-  #pcb();
+  pcb();
 //}

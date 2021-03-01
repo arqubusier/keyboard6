@@ -68,8 +68,8 @@ module usbminib_(data) {
     cube([wn, ln_, h]);
 }
 module usbminib() usbminib_(usbminib_data);
-module usbminib_pcb_2d() {
-  square([get(usbminib_data, "width_pcb"), get(usbminib_data, "length_pcb")]);
+module usbminib_pcb_2d(clearance) {
+  square([get(usbminib_data, "width_pcb") + clearance, get(usbminib_data, "length_pcb") + clearance]);
 }
 
 trrs_data = [
@@ -91,8 +91,8 @@ module trrs_(data) {
         cylinder(d=get(data, "diameter"), h=get(data, "ring_length"));
 }
 module trrs() trrs_(trrs_data);
-module trrs_pcb_2d() {
-  square([get(trrs_data, "width_pcb"), get(trrs_data, "length_pcb")]);
+module trrs_pcb_2d(clearance) {
+  square([get(trrs_data, "width_pcb") + clearance, get(trrs_data, "length_pcb") + clearance]);
 }
 
 usbcable_data = [
