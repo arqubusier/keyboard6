@@ -12,11 +12,16 @@ outer_height = inner_height + switch_height;
 
 side_wall_thick = 4;
 // board clearance is measured from the switch hole
-board_clearance = 2;
+board_clearance = 1;
 switch_side_clearance = switch_side_inner + board_clearance;
 switch_side_outline = switch_side_inner + board_clearance + side_wall_thick;
 corner_diam_inner = inset_diameter_outer + 2*board_clearance - 2*side_wall_thick;
 corner_diam_outer = inset_diameter_outer;
+plate_offset = 1.4;
+plate_clearance = .4;
+corner_diam_plate = inset_diameter_outer - plate_offset;
+corner_diam_plate_clearance = inset_diameter_outer - plate_offset + plate_clearance;
+plate_total_height = bottom_height + plate_clearance;
 echo(side_wall_thick);
 echo(inset_diameter_outer);
 echo(corner_diam_inner);
@@ -29,14 +34,30 @@ module corner_inner_2d() {
   circle(d=corner_diam_inner);
 }
 
+module corner_plate_2d() {
+  circle(d=corner_diam_plate);
+}
+
+module corner_plate_clearance_2d() {
+  circle(d=corner_diam_plate_clearance);
+}
+
 module switch_outer_2d() {
-  side = switch_side_inner + board_clearance + side_wall_thick;
+  side = switch_side_outline;
   square(side, center=true);
 }
 
 module switch_inner_2d() {
   side = switch_side_inner + board_clearance;
   square(side, center=true);
+}
+
+module switch_plate_2d() {
+  square(switch_side_outline - plate_offset , center=true);
+}
+
+module switch_plate_clearance_2d() {
+  square(switch_side_outline - plate_offset + plate_clearance , center=true);
 }
 
 module switch_outer() {
@@ -153,6 +174,13 @@ corners_pos = concat( insets_pos,
 
 module insets() {
   for (pos = insets_pos) {
+    translate(pos + z(plate_total_height))
+      children();
+  }
+}
+
+module screws() {
+  for (pos = insets_pos) {
     translate(pos)
       children();
   }
@@ -186,37 +214,28 @@ module thumb_holes() {
   thumbs_body_top() {
     switch_neg(5);
   }
-
-}
-
-module thumbs_plate_inner() {
-  hull() {
-    thumb_pattern()
-      switch_inner_2d();
-    thumbs_extend()
-      corner_inner_2d();
-  }
-}
-
-module thumbs_plate() {
-  hull() {
-    thumb_pattern()
-      switch_outer_2d();
-    thumbs_extend()
-      corner_outer_2d();
-  }
 }
 
 module thumb_body_inner() {
   trim = 1;  
   translate([0,0,-trim])
     linear_extrude(height=inner_height + trim)
-      thumbs_plate_inner();
+      hull() {
+        thumb_pattern()
+          switch_inner_2d();
+        thumbs_extend()
+          corner_inner_2d();
+      }
 }
 
 module thumb_body_outer() {
   linear_extrude(height=inner_height + switch_height)
-    thumbs_plate();
+    hull() {
+      thumb_pattern()
+        switch_outer_2d();
+      thumbs_extend()
+        corner_outer_2d();
+    }
 }
 
 /******************************************************************************
@@ -273,7 +292,7 @@ module main_inner() {
     translate([0, 0, -switch_height]) {
       main_switches_outline()
         switch_inner();
-      #main_insets_outline()
+      main_insets_outline()
       cylinder(d=corner_diam_inner, h=inset_height_outer);
     }
   }
@@ -293,28 +312,45 @@ module main_holes() {
 
 /*****************************************************************************/
 
-module plate() {
-  translate([0, 0, -bottom_height]) {
-    difference() {
-      linear_extrude(height=bottom_height) {
-        union() {
-          thumbs_plate();
- 
-          hull() {
-            main_pattern()
-              SwitchPos2D();
- 
-              main_insets_bottom()
-                corner_outer_2d();
+module plate_outline(height) {
+  corner = 0;
+  switch = 1;
+  difference() {
+    linear_extrude(height) {
+      union() {
+        hull() {
+          thumb_pattern()
+            children(switch);
+          thumbs_extend()
+            children(corner);
+        }
+        hull() {
+          main_pattern()
+            children(switch);
+
+            main_insets_bottom()
+            children(corner);
           }
         }
-      }
-      insets()
-        screw_hole();
     }
+    screws()
+      screw_hole();
   }
 }
 
+module plate() {
+  plate_outline(bottom_height) {
+    corner_plate_2d();
+    switch_plate_2d();
+  }
+}
+
+module plate_clearance() {
+  plate_outline(plate_total_height) {
+    corner_plate_clearance_2d();
+    switch_plate_clearance_2d();
+  }
+}
 /******************************************************************************
 
 		Dovetail
@@ -473,14 +509,14 @@ module pcb() {
     
     translate(trrs_pos) 
       trrs_pcb_2d();
-      #pcb_corner_2d();
+      pcb_corner_2d();
    }
    hull() {
      main_pattern()
      switch_pcb_2d();
      controller_clearance_2d();
       pcb_corner_2d();
-     }
+   }
 }
 
 
@@ -518,6 +554,7 @@ difference() {
   insets()
       screw_inset_neg();
 
+  plate_clearance();
 }
   translate(trrs_pos)
     trrs();
@@ -531,5 +568,5 @@ difference() {
 
   //translate([0,0,-bottom_height])
   // hand_rest();
-pcb();
+//pcb();
 //}

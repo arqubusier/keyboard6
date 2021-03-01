@@ -14,3 +14,6 @@
  * ];
  */
 function get(data, key) = data[search([key], data)[0]][1];
+function x(val) = [val,0,0];
+function y(val) = [0,val,0];
+function z(val) = [0,0,val];
