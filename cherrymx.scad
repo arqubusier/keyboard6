@@ -7,6 +7,7 @@ inset_h=switch_height - plate_thick;
 inset_w=5;
 inset_d=0.7;
 outset_d=0.2;
+switch_pcb_to_plate_top = 4.7;
 
 module inset() {
     translate([0, switch_side_inner/2 + inset_d/2, (switch_height)/2 -inset_h - plate_thick])

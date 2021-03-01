@@ -472,12 +472,15 @@ module hand_rest() {
 		Pcb
 
 /*****************************************************************************/
-
+pcb_thick = 1.57;
+pcb_pos = z(outer_height - switch_pcb_to_plate_top-pcb_thick);
 usbminib_pos = corners_pos[7] + [-get(usbminib_data, "width_pcb") - side_wall_thick - 4
-                                  , -get(usbminib_data, "length") + corner_diam_outer/2, 0];
+                                  , -get(usbminib_data, "length") + corner_diam_outer/2,
+                                 pcb_pos[2]-get(usbminib_data, "height")];
 usbminib_pcb_pos = usbminib_pos + [0, -0.5, 0];
 
-trrs_pos =  [usbminib_pos[0] - 13, corners_pos[7][1] + corner_diam_outer/2  -get(trrs_data, "length")-get(trrs_data, "ring_length"), 0];
+trrs_pos =  [usbminib_pos[0] - 13, corners_pos[7][1] + corner_diam_outer/2  -get(trrs_data, "length")-get(trrs_data, "ring_length"),
+             pcb_pos[2]-get(trrs_data, "height")];
 
 module switch_pcb_2d() {
   square(switch_side_inner, center=true);
@@ -500,23 +503,27 @@ module pcb_corner_2d() {
 }
 
 module pcb() {
-  hull() {
-    controller_clearance_2d();
-    thumb_pattern()
+  translate(pcb_pos) {
+    linear_extrude(height=pcb_thick) {
+      hull() {
+        controller_clearance_2d();
+        thumb_pattern()
+          switch_pcb_2d();
+        translate(usbminib_pcb_pos)
+          usbminib_pcb_2d();
+        
+        translate(trrs_pos) 
+          trrs_pcb_2d();
+          pcb_corner_2d();
+      }
+      hull() {
+        main_pattern()
         switch_pcb_2d();
-    translate(usbminib_pcb_pos)
-      usbminib_pcb_2d();
-    
-    translate(trrs_pos) 
-      trrs_pcb_2d();
-      pcb_corner_2d();
-   }
-   hull() {
-     main_pattern()
-     switch_pcb_2d();
-     controller_clearance_2d();
-      pcb_corner_2d();
-   }
+        controller_clearance_2d();
+         pcb_corner_2d();
+      }
+    }
+  }
 }
 
 
@@ -568,5 +575,5 @@ difference() {
 
   //translate([0,0,-bottom_height])
   // hand_rest();
-//pcb();
+  #pcb();
 //}
