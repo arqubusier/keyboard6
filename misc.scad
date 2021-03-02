@@ -57,17 +57,17 @@ usbminib_data = [
   ["pad_length", 2.5],
   ["flange_length", 1.5],
 ];
-module usbminib_(data) {
-  w = get(data, "width_pcb");
-  wn = get(data, "width_narrow");
-  l = get(data, "length");
-  ln_ = get(data, "length_narrow");
-  h = get(data, "height");
+module usbminib_(data, clearance) {
+  w = get(data, "width_pcb") + clearance;
+  wn = get(data, "width_narrow") + clearance;
+  l = get(data, "length") + clearance;
+  ln_ = get(data, "length_narrow") + clearance;
+  h = get(data, "height") + clearance;
   cube([w, l - ln_, h]);
   translate([w/2-wn/2, l - ln_, 0])
     cube([wn, ln_, h]);
 }
-module usbminib() usbminib_(usbminib_data);
+module usbminib(clearance=0) usbminib_(usbminib_data, clearance);
 module usbminib_pcb_2d(clearance) {
   square([get(usbminib_data, "width_pcb") + clearance, get(usbminib_data, "length_pcb") + clearance]);
 }
@@ -81,16 +81,16 @@ trrs_data = [
     ["diameter", 5.6],
     ["ring_length", 2],
   ];
-module trrs_(data) {
-  w = get(data, "width_pcb");
-  l = get(data, "length");
-  h = get(data, "height");
+module trrs_(data, clearance) {
+  w = get(data, "width_pcb") + clearance;
+  l = get(data, "length") + clearance;
+  h = get(data, "height") + clearance;
   cube([w, l, h]);
   translate([w/2, l, h/2])
     rotate([-90, 0, 0])
-        cylinder(d=get(data, "diameter"), h=get(data, "ring_length"));
+        cylinder(d=get(data, "diameter") + clearance, h=get(data, "ring_length") + clearance);
 }
-module trrs() trrs_(trrs_data);
+module trrs(clearance=0) trrs_(trrs_data, clearance);
 module trrs_pcb_2d(clearance) {
   square([get(trrs_data, "width_pcb") + clearance, get(trrs_data, "length_pcb") + clearance]);
 }

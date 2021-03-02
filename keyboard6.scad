@@ -498,18 +498,18 @@ module controller_2d(clearance) {
     controller_shape_2d(clearance);
 }
 
-corner_pcb_pos = [Index2Pos(0)[0] - switch_side_inner/2, usbminib_pcb_pos[1],0];
+corner_pcb_pos = [Index2Pos(0)[0] - switch_side_inner/2, trrs_pos[1],0];
 
 module pcb_2d(clearance=0) {
   hull() {
     translate(corner_pcb_pos)
-        usbminib_pcb_2d(clearance);
+        trrs_pcb_2d(clearance);
     thumb_pattern()
         switch_pcb_2d(clearance);
     translate(usbminib_pcb_pos)
         usbminib_pcb_2d(clearance);
     
-    #translate(trrs_pos - x(clearance/2)) 
+    translate(trrs_pos - x(clearance/2)) 
         trrs_pcb_2d(clearance);
 
     controller_2d(clearance);
@@ -537,6 +537,43 @@ module pcb_with_clearance() {
   }
 }
 
+module usbminib_hole() {
+  translate(usbminib_pos + [-plate_clearance/2, 0, -plate_clearance/2]) {
+    usbminib(pcb_clearance);
+  }
+}
+
+module usbminib_hole_bottom(clearance = 0) {
+  wusb = get(usbminib_data, "width_pcb") + pcb_clearance;
+  lusb = get(usbminib_data, "length_pcb") + pcb_clearance;
+  husb = get(usbminib_data, "height") + pcb_clearance;
+  wneg = get(usbminib_data, "width_narrow") + clearance;
+  lneg = get(usbminib_data, "length_narrow") + pcb_clearance;
+  hneg = trrs_pos[2] + husb/2;
+  translate([usbminib_pos[0] + -plate_clearance/2, usbminib_pos[1] + -plate_clearance/2, 0]) {
+    translate([wusb/2 - wneg/2, lusb - lneg, 0])
+      cube([wneg, lneg, hneg]);
+  }
+}
+
+module trrs_hole() {
+  translate(trrs_pos + [-plate_clearance/2, -plate_clearance/2, -plate_clearance/2]) {
+    trrs(pcb_clearance);
+  }
+}
+
+module trrs_hole_bottom(clearance=0) {
+  htrrs = get(trrs_data, "height");
+  wtrrs = get(trrs_data, "width_pcb") + clearance;
+  ltrrs = get(trrs_data, "length_pcb");
+  wneg = get(trrs_data, "diameter") + clearance;
+  lneg = get(trrs_data, "ring_length");
+  hneg = trrs_pos[2] + htrrs/2;
+  #translate([trrs_pos[0] + -clearance/2, trrs_pos[1] + plate_clearance/2, 0]) {
+    translate([wtrrs/2 - wneg/2, ltrrs, 0])
+      cube([wneg, lneg, hneg]);
+  }
+}
 
 /******************************************************************************
 
@@ -544,8 +581,7 @@ module pcb_with_clearance() {
 
 /*****************************************************************************/
 
-//mirror([1,0,0]) {
-difference() {
+module top_positive() {
   union() {
     difference() {
       union(){
@@ -565,6 +601,23 @@ difference() {
       dove_tail_chamfer2(1);
     }
   }
+}
+
+module plate_assembly() {
+  difference() {
+    union() {
+        plate()
+        trrs_hole_bottom();
+        usbminib_hole_bottom();
+    }
+    trrs_hole();
+    usbminib_hole();
+  }
+}
+
+//mirror([1,0,0]) {
+difference() {
+  top_positive();
 
   main_holes();
   thumb_holes();
@@ -574,11 +627,18 @@ difference() {
 
   plate_clearance();
   pcb_with_clearance();
+
+  trrs_hole();
+  usbminib_hole();
+  trrs_hole_bottom(pcb_clearance);
+  #usbminib_hole_bottom(pcb_clearance);
 }
-  translate(trrs_pos)
+translate(trrs_pos)
     trrs();
-  translate(usbminib_pos)
+translate(usbminib_pos)
     usbminib();
+plate_assembly();
+
   //  translate([get(usbminib_data, "width")/2 - get(usbcable_data, "width")/2, get(usbminib_data, "length"), 0])
   //#usbminib_pos()
   //  usbcable();
