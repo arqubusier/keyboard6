@@ -64,3 +64,7 @@ module switch(side_outer=switch_side_outer) {
         switch_neg(1);
     }
 }
+
+module keycap(center=true) {
+  cube([18, 18, 8.5],center=center);
+}

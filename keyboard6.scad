@@ -134,8 +134,8 @@ function Index2Pos(index) =
 module thumb_pattern() {
   radius = 80;
   angle_off = 15;
-  angle_sep = 14;
-  translate([radius*sin(angle_off), -radius*cos(angle_off) - 1.5,0])
+  angle_sep = 15.3;
+  translate([radius*sin(angle_off) - 1, -radius*cos(angle_off) - 1.5,0])
     for (i = [0:2]) {
       rotate([0, 0, angle_off + i*angle_sep])
         translate([0, radius, 0])
@@ -302,6 +302,12 @@ module main_holes() {
   }
 }
 
+module full_pattern() {
+  main_pattern()
+    children();
+  thumb_pattern()
+    children();
+}
 
 /******************************************************************************
 
@@ -642,6 +648,7 @@ module connector_assembly() {
       usbminib();
 }
 
+
 //mirror([1,0,0])
 %union() {
   top_assembly();
@@ -650,7 +657,16 @@ module connector_assembly() {
   pcb();
 }
 
+
 pcb_2d();
 
 projection()
   connector_assembly();
+
+full_pattern()
+  switch_inner_2d();
+
+%projection()
+ full_pattern()
+   keycap();
+
