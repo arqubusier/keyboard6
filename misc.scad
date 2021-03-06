@@ -34,9 +34,12 @@ module screw_inset_pos() {
 }
 
 module screw_inset_neg() {
+  countersunk_diameter =inset_diameter+1; 
 	cylinder(d=inset_diameter, inset_height);
 	cylinder(d=inset_diameter-1, inset_height_outer);
-	cylinder(d1=inset_diameter+1, d2=inset_diameter, 1);
+	cylinder(d1=countersunk_diameter, d2=inset_diameter, 1);
+  translate(z(-1))
+    cylinder(d=countersunk_diameter, 1);
 }
 
 /******************************************************************************

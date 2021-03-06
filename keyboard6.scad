@@ -22,9 +22,6 @@ plate_clearance = .4;
 corner_diam_plate = inset_diameter_outer - plate_offset;
 corner_diam_plate_clearance = inset_diameter_outer - plate_offset + plate_clearance;
 plate_total_height = bottom_height + plate_clearance;
-echo(side_wall_thick);
-echo(inset_diameter_outer);
-echo(corner_diam_inner);
 
 module corner_outer_2d() {
   circle(d=corner_diam_outer);
@@ -333,15 +330,17 @@ module plate_outline(height) {
           }
         }
     }
-    screws()
-      screw_hole();
   }
 }
 
 module plate() {
-  plate_outline(bottom_height) {
-    corner_plate_2d();
-    switch_plate_2d();
+  difference() {
+    plate_outline(bottom_height) {
+      corner_plate_2d();
+      switch_plate_2d();
+    }
+    screws()
+    screw_hole();
   }
 }
 
@@ -569,7 +568,7 @@ module trrs_hole_bottom(clearance=0) {
   wneg = get(trrs_data, "diameter") + clearance;
   lneg = get(trrs_data, "ring_length");
   hneg = trrs_pos[2] + htrrs/2;
-  #translate([trrs_pos[0] + -clearance/2, trrs_pos[1] + plate_clearance/2, 0]) {
+  translate([trrs_pos[0] + -clearance/2, trrs_pos[1] + plate_clearance/2, 0]) {
     translate([wtrrs/2 - wneg/2, ltrrs, 0])
       cube([wneg, lneg, hneg]);
   }
@@ -606,7 +605,7 @@ module top_positive() {
 module plate_assembly() {
   difference() {
     union() {
-        plate()
+      plate();
         trrs_hole_bottom();
         usbminib_hole_bottom();
     }
@@ -615,37 +614,34 @@ module plate_assembly() {
   }
 }
 
-//mirror([1,0,0]) {
-difference() {
-  top_positive();
 
-  main_holes();
-  thumb_holes();
-
-  insets()
-      screw_inset_neg();
-
+//mirror([1,0,0])
+union() {
+  difference() {
+    top_positive();
+  
+    main_holes();
+    thumb_holes();
+  
+    insets(){
+        screw_inset_neg();
+    }
+  
   plate_clearance();
   pcb_with_clearance();
-
+  
   trrs_hole();
   usbminib_hole();
   trrs_hole_bottom(pcb_clearance);
-  #usbminib_hole_bottom(pcb_clearance);
-}
+  usbminib_hole_bottom(pcb_clearance);
+  }
+
 translate(trrs_pos)
     trrs();
 translate(usbminib_pos)
     usbminib();
+
 plate_assembly();
+pcb();
+}
 
-  //  translate([get(usbminib_data, "width")/2 - get(usbcable_data, "width")/2, get(usbminib_data, "length"), 0])
-  //#usbminib_pos()
-  //  usbcable();
-
-  //plate();
-
-  //translate([0,0,-bottom_height])
-  // hand_rest();
-  pcb();
-//}
