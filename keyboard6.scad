@@ -614,9 +614,7 @@ module plate_assembly() {
   }
 }
 
-
-//mirror([1,0,0])
-union() {
+module top_assembly() {
   difference() {
     top_positive();
   
@@ -635,13 +633,24 @@ union() {
   trrs_hole_bottom(pcb_clearance);
   usbminib_hole_bottom(pcb_clearance);
   }
-
-translate(trrs_pos)
-    trrs();
-translate(usbminib_pos)
-    usbminib();
-
-plate_assembly();
-pcb();
 }
 
+module connector_assembly() {
+  translate(trrs_pos)
+      trrs();
+  translate(usbminib_pos)
+      usbminib();
+}
+
+//mirror([1,0,0])
+%union() {
+  top_assembly();
+  connector_assembly();
+  plate_assembly();
+  pcb();
+}
+
+pcb_2d();
+
+projection()
+  connector_assembly();
