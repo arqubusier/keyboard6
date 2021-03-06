@@ -499,14 +499,14 @@ module controller_shape_2d(clearance) {
 
 module controller_2d(clearance) {
   translate(Index2Pos(4) + [-switch_side_inner/2,
-                            -switch_side_inner/2 - controller_clearance_width - 8,0])
+                            -switch_side_inner/2 - controller_clearance_width - 5,0])
     controller_shape_2d(clearance);
 }
 
 corner_pcb_pos = [Index2Pos(0)[0] - switch_side_inner/2, trrs_pos[1],0];
 
 module pcb_2d(clearance=0) {
-  hull() {
+  #hull() {
     translate(corner_pcb_pos)
         trrs_pcb_2d(clearance);
     thumb_pattern()
@@ -650,20 +650,20 @@ module connector_assembly() {
 
 
 //mirror([1,0,0])
-%union() {
+union() {
   top_assembly();
   connector_assembly();
-  plate_assembly();
+  %plate_assembly();
   pcb();
 }
 
 
-pcb_2d();
+%pcb_2d();
 
-projection()
+%projection()
   connector_assembly();
 
-full_pattern()
+%full_pattern()
   switch_inner_2d();
 
 %projection()
