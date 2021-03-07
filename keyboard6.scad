@@ -650,7 +650,7 @@ module connector_assembly() {
 
 
 //mirror([1,0,0])
-union() {
+%union() {
   top_assembly();
   connector_assembly();
   %plate_assembly();
@@ -660,10 +660,10 @@ union() {
 
 %pcb_2d();
 
-%projection()
+projection()
   connector_assembly();
 
-%full_pattern()
+full_pattern()
   switch_inner_2d();
 
 %projection()
