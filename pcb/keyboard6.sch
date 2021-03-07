@@ -58,4 +58,26 @@ Text HLabel 4960 4200 0    50   Input ~ 0
 row3
 Text HLabel 4960 4330 0    50   Input ~ 0
 row4
+Wire Wire Line
+	4960 2770 5800 2770
+Wire Wire Line
+	5800 2910 4960 2910
+Wire Wire Line
+	4960 3050 5800 3050
+Wire Wire Line
+	5800 3190 4960 3190
+Wire Wire Line
+	4960 3330 5800 3330
+Wire Wire Line
+	5800 3470 4960 3470
+Wire Wire Line
+	4960 3810 5800 3810
+Wire Wire Line
+	5800 3950 4960 3950
+Wire Wire Line
+	4960 4070 5800 4070
+Wire Wire Line
+	5800 4200 4960 4200
+Wire Wire Line
+	4960 4330 5800 4330
 $EndSCHEMATC
