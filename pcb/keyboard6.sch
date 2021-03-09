@@ -35,29 +35,18 @@ S 3330 2650 1630 1920
 U 6067328E
 F0 "Controller" 50
 F1 "Controller.sch" 50
+F2 "col0" O R 4960 2770 50 
+F3 "row3" I R 4960 4200 50 
+F4 "row4" I R 4960 4330 50 
+F5 "row2" I R 4960 4070 50 
+F6 "row1" I R 4960 3950 50 
+F7 "row0" I R 4960 3810 50 
+F8 "col5" O R 4960 3470 50 
+F9 "col4" O R 4960 3330 50 
+F10 "col3" O R 4960 3190 50 
+F11 "col2" O R 4960 3050 50 
+F12 "col1" O R 4960 2910 50 
 $EndSheet
-Text HLabel 4960 2770 0    50   Output ~ 0
-col0
-Text HLabel 4960 2910 0    50   Output ~ 0
-col1
-Text HLabel 4960 3050 0    50   Output ~ 0
-col2
-Text HLabel 4960 3190 0    50   Output ~ 0
-col3
-Text HLabel 4960 3330 0    50   Output ~ 0
-col4
-Text HLabel 4960 3470 0    50   Output ~ 0
-col5
-Text HLabel 4960 3810 0    50   Input ~ 0
-row0
-Text HLabel 4960 3950 0    50   Input ~ 0
-row1
-Text HLabel 4960 4070 0    50   Input ~ 0
-row2
-Text HLabel 4960 4200 0    50   Input ~ 0
-row3
-Text HLabel 4960 4330 0    50   Input ~ 0
-row4
 Wire Wire Line
 	4960 2770 5800 2770
 Wire Wire Line

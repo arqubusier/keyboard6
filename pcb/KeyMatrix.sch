@@ -1453,4 +1453,14 @@ F 3 "~" H 2880 1760 50  0001 C CNN
 	1    2880 1760
 	0    -1   -1   0   
 $EndComp
+Wire Wire Line
+	8010 4760 8010 4660
+Wire Wire Line
+	8010 4660 7790 4660
+Connection ~ 7790 4660
+Wire Wire Line
+	5510 3660 5510 3560
+Wire Wire Line
+	5510 3560 5290 3560
+Connection ~ 5290 3560
 $EndSCHEMATC

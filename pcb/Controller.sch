@@ -133,11 +133,7 @@ Wire Wire Line
 	8090 4430 8090 3710
 Connection ~ 7150 4430
 Wire Wire Line
-	4730 2880 4790 2880
-Wire Wire Line
 	4790 2880 4790 3030
-Wire Wire Line
-	4730 3080 4790 3080
 Wire Wire Line
 	4790 3080 4790 3030
 Connection ~ 4790 3030
@@ -155,29 +151,14 @@ $EndComp
 Wire Wire Line
 	2380 5090 2380 5200
 Wire Wire Line
-	3310 5410 3310 5090
+	3310 5410 3310 5200
 Connection ~ 2380 5410
 Wire Wire Line
 	2380 5410 3310 5410
 Text GLabel 2380 5320 0    50   Input ~ 0
 GND1
-Wire Wire Line
-	4330 2880 4330 3080
-Text GLabel 4330 2930 0    50   Input ~ 0
-GND1
 Text GLabel 7650 4090 3    50   Input ~ 0
 GND1
-$Comp
-L Switch:SW_Push_Dual SW1
-U 1 1 6068AC98
-P 4530 2880
-F 0 "SW1" H 4530 3165 50  0000 C CNN
-F 1 "SW_Push_Dual" H 4530 3074 50  0000 C CNN
-F 2 "" H 4530 3080 50  0001 C CNN
-F 3 "~" H 4530 3080 50  0001 C CNN
-	1    4530 2880
-	1    0    0    -1  
-$EndComp
 Text GLabel 3750 3350 0    50   Input ~ 0
 GND1
 Wire Wire Line
@@ -234,7 +215,7 @@ Wire Wire Line
 	5800 2660 5800 2730
 Connection ~ 5700 2660
 Wire Wire Line
-	5700 2650 5700 2420
+	5700 2660 5700 2420
 Text GLabel 7640 3050 1    50   Input ~ 0
 VBUS
 Wire Wire Line
@@ -277,7 +258,7 @@ Connection ~ 3100 3710
 Wire Wire Line
 	3100 3710 3610 3710
 Wire Wire Line
-	2380 5200 2100 5200
+	2380 5200 2280 5200
 Wire Wire Line
 	2100 5200 2100 4220
 Connection ~ 2380 5200
@@ -392,7 +373,7 @@ L Device:Crystal_Small Y1
 U 1 1 609AA1F0
 P 4470 3330
 F 0 "Y1" V 4424 3418 50  0000 L CNN
-F 1 "Crystal_Small" V 4515 3418 50  0000 L CNN
+F 1 "16MHz" V 4515 3418 50  0000 L CNN
 F 2 "" H 4470 3330 50  0001 C CNN
 F 3 "~" H 4470 3330 50  0001 C CNN
 	1    4470 3330
@@ -440,8 +421,6 @@ NoConn ~ 3610 4890
 NoConn ~ 2680 4890
 NoConn ~ 7250 3710
 NoConn ~ 8190 3710
-Text GLabel 6740 5130 2    50   Input ~ 0
-GND1
 Wire Wire Line
 	6740 5130 6300 5130
 Text HLabel 6470 5630 2    50   Input ~ 0
@@ -501,4 +480,41 @@ NoConn ~ 6300 4630
 NoConn ~ 6300 4730
 NoConn ~ 6300 4930
 NoConn ~ 6300 5430
+Wire Wire Line
+	3210 5090 3210 5200
+Wire Wire Line
+	3210 5200 3310 5200
+Connection ~ 3310 5200
+Wire Wire Line
+	3310 5200 3310 5090
+Wire Wire Line
+	2280 5090 2280 5200
+Connection ~ 2280 5200
+Wire Wire Line
+	2280 5200 2100 5200
+Text GLabel 6740 5130 2    50   Input ~ 0
+GND1
+Text Notes 6770 5050 0    50   ~ 0
+HWB tied to ground means that the\nbootloader will be executed \n(assuming correct WHBE fuse value)
+Text Notes 3410 5200 0    50   ~ 0
+Only one of the USB and TRRS connectors\nwill be populated per board.
+Wire Wire Line
+	4730 3080 4790 3080
+Wire Wire Line
+	4730 2880 4790 2880
+$Comp
+L Switch:SW_Push_Dual SW101
+U 1 1 6068AC98
+P 4530 2880
+F 0 "SW101" H 4530 3165 50  0000 C CNN
+F 1 "SW_Push_Dual" H 4530 3074 50  0000 C CNN
+F 2 "" H 4530 3080 50  0001 C CNN
+F 3 "~" H 4530 3080 50  0001 C CNN
+	1    4530 2880
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	4330 2880 4330 3080
+Text GLabel 4330 2930 0    50   Input ~ 0
+GND1
 $EndSCHEMATC
