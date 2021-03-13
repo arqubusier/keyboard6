@@ -392,10 +392,10 @@ Wire Wire Line
 Wire Wire Line
 	4730 2880 4790 2880
 $Comp
-L Switch:SW_Push_Dual SW29
+L Switch:SW_Push_Dual SW30
 U 1 1 6068AC98
 P 4530 2880
-F 0 "SW29" H 4530 3165 50  0000 C CNN
+F 0 "SW30" H 4530 3165 50  0000 C CNN
 F 1 "SW_Push_Dual" H 4530 3074 50  0000 C CNN
 F 2 "keyboard6:schurter sms gullwing lead" H 4530 3080 50  0001 C CNN
 F 3 "~" H 4530 3080 50  0001 C CNN

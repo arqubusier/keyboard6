@@ -68,7 +68,7 @@ module usbminib_(data, clearance) {
   h = get(data, "height") + clearance;
   cube([w, l - ln_, h]);
   translate([w/2-wn/2, l - ln_, 0])
-    cube([wn, ln_, h]);
+    cube([wn, ln_ + 3, h]);
 }
 module usbminib(clearance=0) usbminib_(usbminib_data, clearance);
 module usbminib_pcb_2d(clearance) {

@@ -108,6 +108,9 @@ module main(col_start=0, col_n=n_columns, row_start=0, row_n=5) {
 
 palm_switch_pos = Index2Pos(19) + [1*switch_side_outer, -1.8*switch_side_outer, 0];
 
+function n_switches_(col=0) = (col == n_columns) ? 0: n_rows[col] + n_switches_(col+1);
+n_switches = n_switches_();
+
 function Index2ColRow(index, col=0, sum=0) =
          let (new_sum = sum + n_rows[col])
             (index <  new_sum ) ?
@@ -126,11 +129,21 @@ function Index2Pos(index) =
             )
             [x_offs, y_offs, 0];
 
+function main_positions(i=0, n=n_switches) =
+  (i == n)? palm_switch_pos : concat([Index2Pos(i)], main_positions(i+1, n));
+
 /******************************************************************************
 
 		Thumb Cluster patterns
 
 /*****************************************************************************/
+function thumb_angles(i=0,n=3) =
+  let (
+       angle_off = 15,
+       angle_sep = 15.3
+       )
+  (i == n)? [] : concat([angle_off + i*angle_sep], thumb_angles(i+1, n));
+
 module thumb_pattern() {
   radius = 80;
   angle_off = 15;
@@ -481,9 +494,8 @@ pcb_thick = 1.57;
 pcb_height_clearance = .2;
 pcb_pos = z(outer_height - switch_pcb_to_plate_top-pcb_thick);
 usbminib_pos = corners_pos[7] + [-get(usbminib_data, "width_pcb") - side_wall_thick - 4
-                                  , -get(usbminib_data, "length") + corner_diam_outer/2,
+                                  , -get(usbminib_data, "length") + corner_diam_outer/2 - 1,
                                  pcb_pos[2]-get(usbminib_data, "height")];
-usbminib_pcb_pos = usbminib_pos + [0, -0.5, 0];
 
 trrs_pos =  [usbminib_pos[0] - 13, corners_pos[7][1] + corner_diam_outer/2  -get(trrs_data, "length")-get(trrs_data, "ring_length"),
              pcb_pos[2]-get(trrs_data, "height")];
@@ -508,7 +520,7 @@ module pcb_2d(clearance=0) {
         trrs_pcb_2d(clearance);
     thumb_pattern()
         switch_inner_2d(clearance);
-    translate(usbminib_pcb_pos)
+    translate(usbminib_pos)
         usbminib_pcb_2d(clearance);
     
     translate(trrs_pos - x(clearance/2)) 
@@ -638,16 +650,24 @@ module top_assembly() {
   }
 }
 
+trrs_footprint_pos = trrs_pos +
+            x(get(trrs_data, "width_pcb")/2) +
+  y(get(trrs_data, "length"));
+usbminib_footprint_pos = usbminib_pos +
+            x(get(usbminib_data, "width_pcb")/2) +
+  y(get(usbminib_data, "length_pcb"));
+
 module connector_assembly() {
   translate(trrs_pos)
       trrs();
+
   translate(usbminib_pos)
       usbminib();
 }
 
 
 //mirror([1,0,0])
-%union() {
+union() {
   top_assembly();
   connector_assembly();
   %plate_assembly();
@@ -657,13 +677,21 @@ module connector_assembly() {
 
 %pcb_2d();
 
-projection()
+%projection()
   connector_assembly();
 
-full_pattern()
-  switch_inner_2d();
+%full_pattern() {
+    switch_inner_2d();
+}
 
 %projection()
  full_pattern()
    keycap();
 
+
+
+// Used  to import positions in kicad
+echo(trrs_footprint_pos);
+echo(usbminib_footprint_pos);
+echo(main_positions());
+echo(thumb_angles());
