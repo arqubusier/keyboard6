@@ -691,7 +691,7 @@ union() {
 
 
 // Used  to import positions in kicad
-echo(trrs_footprint_pos);
-echo(usbminib_footprint_pos);
-echo(main_positions());
+echo("trrs", trrs_footprint_pos);
+echo("usbminib", usbminib_footprint_pos);
+echo("switches", main_positions());
 echo(thumb_angles());
