@@ -44,8 +44,8 @@ module switch_outer_2d() {
   square(side, center=true);
 }
 
-module switch_inner_2d() {
-  side = switch_side_inner + pcb_clearance;
+module switch_inner_2d(clearance=0) {
+  side = switch_side_inner;
   square(side, center=true);
 }
 
@@ -219,7 +219,7 @@ module thumb_body_inner() {
     linear_extrude(height=inner_height + trim)
       hull() {
         thumb_pattern()
-          switch_inner_2d();
+          switch_inner_2d(pcb_clearance);
         thumbs_extend()
           corner_inner_2d();
       }
@@ -488,9 +488,6 @@ usbminib_pcb_pos = usbminib_pos + [0, -0.5, 0];
 trrs_pos =  [usbminib_pos[0] - 13, corners_pos[7][1] + corner_diam_outer/2  -get(trrs_data, "length")-get(trrs_data, "ring_length"),
              pcb_pos[2]-get(trrs_data, "height")];
 
-module switch_pcb_2d(clearance=0) {
-  square(switch_side_inner+clearance, center=true);
-}
 controller_clearance_length = 50;
 controller_clearance_width = 20;
 module controller_shape_2d(clearance) {
@@ -510,7 +507,7 @@ module pcb_2d(clearance=0) {
     translate(corner_pcb_pos)
         trrs_pcb_2d(clearance);
     thumb_pattern()
-        switch_pcb_2d(clearance);
+        switch_inner_2d(clearance);
     translate(usbminib_pcb_pos)
         usbminib_pcb_2d(clearance);
     
@@ -521,7 +518,7 @@ module pcb_2d(clearance=0) {
   }
   hull() {
     main_pattern()
-        switch_pcb_2d(clearance);
+        switch_inner_2d(clearance);
         controller_2d(clearance);
     translate(corner_pcb_pos)
         usbminib_pcb_2d(clearance);

@@ -900,12 +900,12 @@ F 3 "~" H 4090 1760 50  0001 C CNN
 	0    -1   -1   0   
 $EndComp
 $Comp
-L Switch:SW_DIP_x01 SW0L1
+L Switch:SW_DIP_x01 SW0
 U 1 1 5F901F0B
 P 2880 1760
-F 0 "SW0L1" V 2834 1890 50  0000 L CNN
+F 0 "SW0" V 2834 1890 50  0000 L CNN
 F 1 "SW_DIP_x01" V 2925 1890 50  0000 L CNN
-F 2 "Button_Switch_Keyboard:SW_Cherry_MX_6.25u_PCB" H 2880 1760 50  0001 C CNN
+F 2 "Button_Switch_Keyboard:SW_Cherry_MX_1.00u_PCB" H 2880 1760 50  0001 C CNN
 F 3 "~" H 2880 1760 50  0001 C CNN
 	1    2880 1760
 	0    -1   -1   0   
