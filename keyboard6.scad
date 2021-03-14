@@ -138,7 +138,7 @@ function main_positions(i=0, n=n_switches) =
 
 /*****************************************************************************/
 thumb_angle_offset = 15;
-thumb_angle_sep = 15.3;
+thumb_angle_sep = 15.4;
 
 function thumb_angle(i) = thumb_angle_offset + i*thumb_angle_sep;
 
@@ -147,7 +147,7 @@ function thumb_angles(i=0,n=3) =
 
 function thumb_position(i) =
   let (radius = 80,
-       m1 = moveM([radius*sin(thumb_angle_offset) - 1, -radius*cos(thumb_angle_offset) - 1.5,0]),
+       m1 = moveM([radius*sin(thumb_angle_offset) - 1.35, -radius*cos(thumb_angle_offset) - 1.5 -.6,0]),
        r = rotZM(thumb_angle(i)),
        m2 = moveM([0, radius, 0]),
        transform = m1*r*m2)
@@ -528,7 +528,7 @@ module controller_2d(clearance) {
 corner_pcb_pos = [Index2Pos(0)[0] - switch_side_inner/2, trrs_pos[1],0];
 
 module pcb_2d(clearance=0) {
-  #hull() {
+  hull() {
     translate(corner_pcb_pos)
         trrs_pcb_2d(clearance);
     thumb_pattern()
@@ -688,7 +688,7 @@ union() {
 }
 
 
-%pcb_2d();
+!pcb_2d();
 
 %projection()
   connector_assembly();
