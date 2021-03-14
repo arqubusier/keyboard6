@@ -130,7 +130,7 @@ function Index2Pos(index) =
             [x_offs, y_offs, 0];
 
 function main_positions(i=0, n=n_switches) =
-  (i == n)? palm_switch_pos : concat([Index2Pos(i)], main_positions(i+1, n));
+  (i == n)? [palm_switch_pos] : concat([Index2Pos(i)], main_positions(i+1, n));
 
 /******************************************************************************
 
