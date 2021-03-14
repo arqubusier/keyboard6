@@ -95,7 +95,7 @@ module trrs_(data, clearance) {
 }
 module trrs(clearance=0) trrs_(trrs_data, clearance);
 module trrs_pcb_2d(clearance) {
-  square([get(trrs_data, "width_pcb") + clearance, get(trrs_data, "length_pcb") + clearance]);
+  square([get(trrs_data, "width_pcb") + clearance, get(trrs_data, "length") + clearance]);
 }
 
 usbcable_data = [

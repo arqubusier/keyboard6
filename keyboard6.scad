@@ -46,7 +46,7 @@ module switch_outer_2d() {
 
 module switch_inner_2d(clearance=0) {
   side = switch_side_inner;
-  square(side, center=true);
+  square(side + clearance, center=true);
 }
 
 module switch_plate_2d() {
@@ -245,7 +245,7 @@ module thumb_body_inner() {
     linear_extrude(height=inner_height + trim)
       hull() {
         thumb_pattern()
-          switch_inner_2d(pcb_clearance);
+          switch_inner_2d();
         thumbs_extend()
           corner_inner_2d();
       }
@@ -536,7 +536,7 @@ module pcb_2d(clearance=0) {
     translate(usbminib_pos)
         usbminib_pcb_2d(clearance);
     
-    translate(trrs_pos - x(clearance/2)) 
+    translate(trrs_pos) 
         trrs_pcb_2d(clearance);
 
     controller_2d(clearance);
@@ -549,6 +549,7 @@ module pcb_2d(clearance=0) {
         usbminib_pcb_2d(clearance);
   }
 }
+
 
 module pcb() {
   translate(pcb_pos) {
@@ -671,11 +672,15 @@ usbminib_footprint_pos = usbminib_pos +
   y(get(usbminib_data, "length_pcb"));
 
 module connector_assembly() {
-  translate(trrs_pos)
+  translate(trrs_pos) {
       trrs();
+      #cube(5);
+  }
 
-  translate(usbminib_pos)
+  translate(usbminib_pos){
       usbminib();
+      #cube(5);
+  }
 }
 
 
@@ -683,23 +688,18 @@ module connector_assembly() {
 union() {
   top_assembly();
   connector_assembly();
-  %plate_assembly();
-  pcb();
+  //plate_assembly();
+  //pcb();
 }
-
 
 !pcb_2d();
 
-%projection()
-  connector_assembly();
 
-%full_pattern() {
-    switch_inner_2d();
-}
-
+/*
 %projection()
  full_pattern()
    keycap();
+*/
 
 
 
