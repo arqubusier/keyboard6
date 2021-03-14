@@ -137,24 +137,37 @@ function main_positions(i=0, n=n_switches) =
 		Thumb Cluster patterns
 
 /*****************************************************************************/
-function thumb_angles(i=0,n=3) =
-  let (
-       angle_off = 15,
-       angle_sep = 15.3
-       )
-  (i == n)? [] : concat([angle_off + i*angle_sep], thumb_angles(i+1, n));
+thumb_angle_offset = 15;
+thumb_angle_sep = 15.3;
 
-module thumb_pattern() {
-  radius = 80;
-  angle_off = 15;
-  angle_sep = 15.3;
-  translate([radius*sin(angle_off) - 1, -radius*cos(angle_off) - 1.5,0])
-    for (i = [0:2]) {
-      rotate([0, 0, angle_off + i*angle_sep])
-        translate([0, radius, 0])
-          children();
-    }
+function thumb_angle(i) = thumb_angle_offset + i*thumb_angle_sep;
+
+function thumb_angles(i=0,n=3) =
+  (i == n)? [] : concat([thumb_angle(i)], thumb_angles(i+1, n));
+
+function thumb_position(i) =
+  let (radius = 80,
+       m1 = moveM([radius*sin(thumb_angle_offset) - 1, -radius*cos(thumb_angle_offset) - 1.5,0]),
+       r = rotZM(thumb_angle(i)),
+       m2 = moveM([0, radius, 0]),
+       transform = m1*r*m2)
+  vec3(transform * [0, 0, 0, 1]);
+
+function thumb_positions(i=0, n=3) =
+  (i == n)? [] : concat([thumb_position(i)], thumb_positions(i+1, n));
+
+
+module thumb_pattern(n=3) {
+  for (i = [0:n-1]) {
+    pos = thumb_position(i);
+    echo(i, pos);
+    translate(pos)
+      rotate(thumb_angle(i))
+      children();
+  }
 }
+
+          
 
 /******************************************************************************
 
@@ -694,4 +707,5 @@ union() {
 echo("trrs", trrs_footprint_pos);
 echo("usbminib", usbminib_footprint_pos);
 echo("switches", main_positions());
-echo(thumb_angles());
+echo("thumb_angles", thumb_angles());
+echo("thumb_positions", thumb_positions());

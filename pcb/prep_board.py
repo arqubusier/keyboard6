@@ -3,6 +3,12 @@ from math import pi
 import re
 board = GetBoard()
 
+
+module = board.FindModuleByReference("SW28")
+point = pcbnew.wxPoint(FromMM(float(x)), FromMM(float(y)))
+module.SetPosition(point)
+module.SetOrientationDegrees(270)
+
 num = r'([-0-9.]+)'
 pos_regex = r'\s*'.join([r'\[', num, r',', num, r',', num])
 def place_connector(module_name, l):
