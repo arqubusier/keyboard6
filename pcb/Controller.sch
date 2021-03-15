@@ -329,30 +329,24 @@ Text HLabel 6470 5830 2    50   Input ~ 0
 row1
 Text HLabel 6470 5930 2    50   Input ~ 0
 row0
-Text HLabel 6470 5230 2    50   Output ~ 0
+Text HLabel 6470 4030 2    50   Output ~ 0
 col5
-Text HLabel 6470 3530 2    50   Output ~ 0
+Text HLabel 6470 3930 2    50   Output ~ 0
 col4
 Text HLabel 6470 3630 2    50   Output ~ 0
 col3
-Text HLabel 6470 3730 2    50   Output ~ 0
+Text HLabel 6470 3530 2    50   Output ~ 0
 col2
-Text HLabel 6470 4830 2    50   Output ~ 0
+Text HLabel 6470 3430 2    50   Output ~ 0
 col1
-Text HLabel 6470 4030 2    50   Output ~ 0
+Text HLabel 6470 4930 2    50   Output ~ 0
 col0
 Wire Wire Line
 	6470 3530 6300 3530
 Wire Wire Line
 	6300 3630 6470 3630
 Wire Wire Line
-	6470 3730 6300 3730
-Wire Wire Line
 	6470 4030 6300 4030
-Wire Wire Line
-	6470 4830 6300 4830
-Wire Wire Line
-	6300 5230 6470 5230
 Wire Wire Line
 	6470 5530 6300 5530
 Wire Wire Line
@@ -367,14 +361,11 @@ NoConn ~ 6300 3030
 NoConn ~ 6300 3130
 NoConn ~ 6300 3230
 NoConn ~ 6300 3330
-NoConn ~ 6300 3430
-NoConn ~ 6300 3930
 NoConn ~ 6300 4230
 NoConn ~ 6300 4330
 NoConn ~ 6300 4530
 NoConn ~ 6300 4630
 NoConn ~ 6300 4730
-NoConn ~ 6300 4930
 NoConn ~ 6300 5430
 Wire Wire Line
 	2930 4430 2930 4510
@@ -441,4 +432,13 @@ $EndComp
 Connection ~ 5410 2420
 Wire Wire Line
 	5410 2420 5700 2420
+Wire Wire Line
+	6300 3430 6470 3430
+Wire Wire Line
+	6300 3930 6470 3930
+NoConn ~ 6300 3730
+NoConn ~ 6300 5230
+Wire Wire Line
+	6470 4930 6300 4930
+NoConn ~ 6300 4830
 $EndSCHEMATC

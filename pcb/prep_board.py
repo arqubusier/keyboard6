@@ -21,10 +21,19 @@ def place_switches(l):
         x = float(pos[0])
         y = -float(pos[1])
         sw = 'SW' + str(n)
-        module = board.FindModuleByReference(sw)
+        sw_module = board.FindModuleByReference(sw)
         point = pcbnew.wxPoint(FromMM(x), FromMM(y))
-        module.SetOrientationDegrees(0)
-        module.SetPosition(point)
+        sw_module.SetOrientationDegrees(0)
+        sw_module.SetPosition(point)
+
+        d_x = x - 4
+        d_y = y + 4
+        d = 'D' + str(n)
+        d_module = board.FindModuleByReference(d)
+        point = pcbnew.wxPoint(FromMM(d_x), FromMM(d_y))
+        d_module.SetOrientationDegrees(0)
+        d_module.SetPosition(point)
+
         n += 1
         
 def place_thumbs(l):

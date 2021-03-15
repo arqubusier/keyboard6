@@ -13,24 +13,15 @@ Comment2 ""
 Comment3 ""
 Comment4 ""
 $EndDescr
-Connection ~ 9690 4670
-Wire Wire Line
-	2380 870  2380 1360
 Wire Wire Line
 	9690 870  2380 870 
-Wire Wire Line
-	9690 4670 9690 870 
 Connection ~ 8990 6450
 Connection ~ 7790 6450
 Connection ~ 6500 6450
 Wire Wire Line
 	7790 5770 7790 5850
 Wire Wire Line
-	7690 5770 7790 5770
-Wire Wire Line
 	8990 5770 8990 5850
-Wire Wire Line
-	8890 5770 8990 5770
 Connection ~ 8990 5360
 Connection ~ 7790 5360
 Connection ~ 6500 5360
@@ -46,63 +37,7 @@ Connection ~ 6500 2060
 Connection ~ 5290 2060
 Connection ~ 4090 2060
 Wire Wire Line
-	3590 3560 3590 4660
-Connection ~ 3590 3560
-Wire Wire Line
-	3590 2460 3590 3560
-Connection ~ 3590 2460
-Wire Wire Line
-	3590 1360 3590 2460
-Wire Wire Line
-	9690 4670 9690 5770
-Wire Wire Line
-	8490 4660 8490 5770
-Connection ~ 8490 4660
-Wire Wire Line
-	8490 3560 8490 4660
-Connection ~ 8490 3560
-Wire Wire Line
-	8490 2460 8490 3560
-Connection ~ 8490 2460
-Wire Wire Line
-	8490 1360 8490 2460
-Wire Wire Line
-	7290 4660 7290 5770
-Connection ~ 7290 4660
-Wire Wire Line
-	7290 3560 7290 4660
-Connection ~ 7290 3560
-Wire Wire Line
-	7290 2460 7290 3560
-Connection ~ 7290 2460
-Wire Wire Line
-	7290 1360 7290 2460
-Wire Wire Line
-	6000 4660 6000 5760
-Connection ~ 6000 4660
-Wire Wire Line
-	6000 3560 6000 4660
-Connection ~ 6000 3560
-Wire Wire Line
-	6000 2460 6000 3560
-Connection ~ 6000 2460
-Wire Wire Line
-	6000 1360 6000 2460
-Wire Wire Line
-	4790 4660 4790 5760
-Connection ~ 4790 4660
-Wire Wire Line
-	4790 3560 4790 4660
-Connection ~ 4790 3560
-Wire Wire Line
-	4790 2460 4790 3560
-Connection ~ 4790 2460
-Wire Wire Line
-	4790 1360 4790 2460
-Wire Wire Line
 	10190 5770 10190 5850
-Wire Wire Line
-	10090 5770 10190 5770
 $Comp
 L Switch:SW_DIP_x01 SW29
 U 1 1 5F9143DB
@@ -115,7 +50,7 @@ F 3 "~" H 10190 6150 50  0001 C CNN
 	0    -1   -1   0   
 $EndComp
 $Comp
-L pspice:DIODE D29
+L Device:D D29
 U 1 1 5F9143D1
 P 9890 5770
 F 0 "D29" H 9890 6035 50  0000 C CNN
@@ -123,12 +58,10 @@ F 1 "DIODE" H 9890 5944 50  0000 C CNN
 F 2 "Diode_SMD:D_SOD-323_HandSoldering" H 9890 5770 50  0001 C CNN
 F 3 "~" H 9890 5770 50  0001 C CNN
 	1    9890 5770
-	1    0    0    -1  
+	-1   0    0    -1  
 $EndComp
 Wire Wire Line
 	10190 4670 10190 4760
-Wire Wire Line
-	10090 4670 10190 4670
 $Comp
 L Switch:SW_DIP_x01 SW28
 U 1 1 5F9143C5
@@ -141,7 +74,7 @@ F 3 "~" H 10190 5060 50  0001 C CNN
 	0    -1   -1   0   
 $EndComp
 $Comp
-L pspice:DIODE D28
+L Device:D D28
 U 1 1 5F914035
 P 9890 4670
 F 0 "D28" H 9890 4935 50  0000 C CNN
@@ -149,14 +82,12 @@ F 1 "DIODE" H 9890 4844 50  0000 C CNN
 F 2 "Diode_SMD:D_SOD-323_HandSoldering" H 9890 4670 50  0001 C CNN
 F 3 "~" H 9890 4670 50  0001 C CNN
 	1    9890 4670
-	1    0    0    -1  
+	-1   0    0    -1  
 $EndComp
 Wire Wire Line
 	2880 1360 2880 1460
-Wire Wire Line
-	2780 1360 2880 1360
 $Comp
-L pspice:DIODE D26
+L Device:D D26
 U 1 1 5F901BBB
 P 2580 1360
 F 0 "D26" H 2580 1625 50  0000 C CNN
@@ -164,7 +95,7 @@ F 1 "DIODE" H 2580 1534 50  0000 C CNN
 F 2 "Diode_SMD:D_SOD-323_HandSoldering" H 2580 1360 50  0001 C CNN
 F 3 "~" H 2580 1360 50  0001 C CNN
 	1    2580 1360
-	1    0    0    -1  
+	-1   0    0    -1  
 $EndComp
 $Comp
 L Switch:SW_DIP_x01 SW27
@@ -178,7 +109,7 @@ F 3 "~" H 8990 6150 50  0001 C CNN
 	0    -1   -1   0   
 $EndComp
 $Comp
-L pspice:DIODE D27
+L Device:D D27
 U 1 1 5F8CF965
 P 8690 5770
 F 0 "D27" H 8690 6035 50  0000 C CNN
@@ -186,12 +117,10 @@ F 1 "DIODE" H 8690 5944 50  0000 C CNN
 F 2 "Diode_SMD:D_SOD-323_HandSoldering" H 8690 5770 50  0001 C CNN
 F 3 "~" H 8690 5770 50  0001 C CNN
 	1    8690 5770
-	1    0    0    -1  
+	-1   0    0    -1  
 $EndComp
 Wire Wire Line
 	8990 4660 8990 4760
-Wire Wire Line
-	8890 4660 8990 4660
 $Comp
 L Switch:SW_DIP_x01 SW1
 U 1 1 5F8CF959
@@ -204,7 +133,7 @@ F 3 "~" H 8990 5060 50  0001 C CNN
 	0    -1   -1   0   
 $EndComp
 $Comp
-L pspice:DIODE D1
+L Device:D D1
 U 1 1 5F8CF94F
 P 8690 4660
 F 0 "D1" H 8690 4925 50  0000 C CNN
@@ -212,12 +141,10 @@ F 1 "DIODE" H 8690 4834 50  0000 C CNN
 F 2 "Diode_SMD:D_SOD-323_HandSoldering" H 8690 4660 50  0001 C CNN
 F 3 "~" H 8690 4660 50  0001 C CNN
 	1    8690 4660
-	1    0    0    -1  
+	-1   0    0    -1  
 $EndComp
 Wire Wire Line
 	8990 3560 8990 3660
-Wire Wire Line
-	8890 3560 8990 3560
 $Comp
 L Switch:SW_DIP_x01 SW2
 U 1 1 5F8CF943
@@ -230,7 +157,7 @@ F 3 "~" H 8990 3960 50  0001 C CNN
 	0    -1   -1   0   
 $EndComp
 $Comp
-L pspice:DIODE D2
+L Device:D D2
 U 1 1 5F8CF939
 P 8690 3560
 F 0 "D2" H 8690 3825 50  0000 C CNN
@@ -238,12 +165,10 @@ F 1 "DIODE" H 8690 3734 50  0000 C CNN
 F 2 "Diode_SMD:D_SOD-323_HandSoldering" H 8690 3560 50  0001 C CNN
 F 3 "~" H 8690 3560 50  0001 C CNN
 	1    8690 3560
-	1    0    0    -1  
+	-1   0    0    -1  
 $EndComp
 Wire Wire Line
 	8990 2460 8990 2560
-Wire Wire Line
-	8890 2460 8990 2460
 $Comp
 L Switch:SW_DIP_x01 SW3
 U 1 1 5F8CF92D
@@ -256,7 +181,7 @@ F 3 "~" H 8990 2860 50  0001 C CNN
 	0    -1   -1   0   
 $EndComp
 $Comp
-L pspice:DIODE D3
+L Device:D D3
 U 1 1 5F8CF923
 P 8690 2460
 F 0 "D3" H 8690 2725 50  0000 C CNN
@@ -264,12 +189,10 @@ F 1 "DIODE" H 8690 2634 50  0000 C CNN
 F 2 "Diode_SMD:D_SOD-323_HandSoldering" H 8690 2460 50  0001 C CNN
 F 3 "~" H 8690 2460 50  0001 C CNN
 	1    8690 2460
-	1    0    0    -1  
+	-1   0    0    -1  
 $EndComp
 Wire Wire Line
 	8990 1360 8990 1460
-Wire Wire Line
-	8890 1360 8990 1360
 $Comp
 L Switch:SW_DIP_x01 SW4
 U 1 1 5F8CF917
@@ -282,7 +205,7 @@ F 3 "~" H 8990 1760 50  0001 C CNN
 	0    -1   -1   0   
 $EndComp
 $Comp
-L pspice:DIODE D4
+L Device:D D4
 U 1 1 5F8CF667
 P 8690 1360
 F 0 "D4" H 8690 1625 50  0000 C CNN
@@ -290,7 +213,7 @@ F 1 "DIODE" H 8690 1534 50  0000 C CNN
 F 2 "Diode_SMD:D_SOD-323_HandSoldering" H 8690 1360 50  0001 C CNN
 F 3 "~" H 8690 1360 50  0001 C CNN
 	1    8690 1360
-	1    0    0    -1  
+	-1   0    0    -1  
 $EndComp
 $Comp
 L Switch:SW_DIP_x01 SW5
@@ -304,7 +227,7 @@ F 3 "~" H 7790 6150 50  0001 C CNN
 	0    -1   -1   0   
 $EndComp
 $Comp
-L pspice:DIODE D5
+L Device:D D5
 U 1 1 5F880171
 P 7490 5770
 F 0 "D5" H 7490 6035 50  0000 C CNN
@@ -312,12 +235,10 @@ F 1 "DIODE" H 7490 5944 50  0000 C CNN
 F 2 "Diode_SMD:D_SOD-323_HandSoldering" H 7490 5770 50  0001 C CNN
 F 3 "~" H 7490 5770 50  0001 C CNN
 	1    7490 5770
-	1    0    0    -1  
+	-1   0    0    -1  
 $EndComp
 Wire Wire Line
 	4090 4660 4090 4760
-Wire Wire Line
-	3990 4660 4090 4660
 $Comp
 L Switch:SW_DIP_x01 SW20
 U 1 1 5F862807
@@ -330,7 +251,7 @@ F 3 "~" H 4090 5060 50  0001 C CNN
 	0    -1   -1   0   
 $EndComp
 $Comp
-L pspice:DIODE D20
+L Device:D D20
 U 1 1 5F8627FD
 P 3790 4660
 F 0 "D20" H 3790 4925 50  0000 C CNN
@@ -338,12 +259,10 @@ F 1 "DIODE" H 3790 4834 50  0000 C CNN
 F 2 "Diode_SMD:D_SOD-323_HandSoldering" H 3790 4660 50  0001 C CNN
 F 3 "~" H 3790 4660 50  0001 C CNN
 	1    3790 4660
-	1    0    0    -1  
+	-1   0    0    -1  
 $EndComp
 Wire Wire Line
 	4090 3560 4090 3660
-Wire Wire Line
-	3990 3560 4090 3560
 $Comp
 L Switch:SW_DIP_x01 SW21
 U 1 1 5F8627F1
@@ -356,7 +275,7 @@ F 3 "~" H 4090 3960 50  0001 C CNN
 	0    -1   -1   0   
 $EndComp
 $Comp
-L pspice:DIODE D21
+L Device:D D21
 U 1 1 5F8627E7
 P 3790 3560
 F 0 "D21" H 3790 3825 50  0000 C CNN
@@ -364,12 +283,10 @@ F 1 "DIODE" H 3790 3734 50  0000 C CNN
 F 2 "Diode_SMD:D_SOD-323_HandSoldering" H 3790 3560 50  0001 C CNN
 F 3 "~" H 3790 3560 50  0001 C CNN
 	1    3790 3560
-	1    0    0    -1  
+	-1   0    0    -1  
 $EndComp
 Wire Wire Line
 	4090 2460 4090 2560
-Wire Wire Line
-	3990 2460 4090 2460
 $Comp
 L Switch:SW_DIP_x01 SW22
 U 1 1 5F8627DB
@@ -382,7 +299,7 @@ F 3 "~" H 4090 2860 50  0001 C CNN
 	0    -1   -1   0   
 $EndComp
 $Comp
-L pspice:DIODE D22
+L Device:D D22
 U 1 1 5F8627D1
 P 3790 2460
 F 0 "D22" H 3790 2725 50  0000 C CNN
@@ -390,14 +307,12 @@ F 1 "DIODE" H 3790 2634 50  0000 C CNN
 F 2 "Diode_SMD:D_SOD-323_HandSoldering" H 3790 2460 50  0001 C CNN
 F 3 "~" H 3790 2460 50  0001 C CNN
 	1    3790 2460
-	1    0    0    -1  
+	-1   0    0    -1  
 $EndComp
 Wire Wire Line
 	4090 1360 4090 1460
-Wire Wire Line
-	3990 1360 4090 1360
 $Comp
-L pspice:DIODE D23
+L Device:D D23
 U 1 1 5F8627BB
 P 3790 1360
 F 0 "D23" H 3790 1625 50  0000 C CNN
@@ -405,12 +320,10 @@ F 1 "DIODE" H 3790 1534 50  0000 C CNN
 F 2 "Diode_SMD:D_SOD-323_HandSoldering" H 3790 1360 50  0001 C CNN
 F 3 "~" H 3790 1360 50  0001 C CNN
 	1    3790 1360
-	1    0    0    -1  
+	-1   0    0    -1  
 $EndComp
 Wire Wire Line
 	7790 4660 7790 4760
-Wire Wire Line
-	7690 4660 7790 4660
 $Comp
 L Switch:SW_DIP_x01 SW6
 U 1 1 5F8627AF
@@ -423,7 +336,7 @@ F 3 "~" H 7790 5060 50  0001 C CNN
 	0    -1   -1   0   
 $EndComp
 $Comp
-L pspice:DIODE D6
+L Device:D D6
 U 1 1 5F8627A5
 P 7490 4660
 F 0 "D6" H 7490 4925 50  0000 C CNN
@@ -431,12 +344,10 @@ F 1 "DIODE" H 7490 4834 50  0000 C CNN
 F 2 "Diode_SMD:D_SOD-323_HandSoldering" H 7490 4660 50  0001 C CNN
 F 3 "~" H 7490 4660 50  0001 C CNN
 	1    7490 4660
-	1    0    0    -1  
+	-1   0    0    -1  
 $EndComp
 Wire Wire Line
 	7790 3560 7790 3660
-Wire Wire Line
-	7690 3560 7790 3560
 $Comp
 L Switch:SW_DIP_x01 SW7
 U 1 1 5F862799
@@ -449,7 +360,7 @@ F 3 "~" H 7790 3960 50  0001 C CNN
 	0    -1   -1   0   
 $EndComp
 $Comp
-L pspice:DIODE D7
+L Device:D D7
 U 1 1 5F86278F
 P 7490 3560
 F 0 "D7" H 7490 3825 50  0000 C CNN
@@ -457,12 +368,10 @@ F 1 "DIODE" H 7490 3734 50  0000 C CNN
 F 2 "Diode_SMD:D_SOD-323_HandSoldering" H 7490 3560 50  0001 C CNN
 F 3 "~" H 7490 3560 50  0001 C CNN
 	1    7490 3560
-	1    0    0    -1  
+	-1   0    0    -1  
 $EndComp
 Wire Wire Line
 	7790 2460 7790 2560
-Wire Wire Line
-	7690 2460 7790 2460
 $Comp
 L Switch:SW_DIP_x01 SW8
 U 1 1 5F862783
@@ -475,7 +384,7 @@ F 3 "~" H 7790 2860 50  0001 C CNN
 	0    -1   -1   0   
 $EndComp
 $Comp
-L pspice:DIODE D8
+L Device:D D8
 U 1 1 5F862779
 P 7490 2460
 F 0 "D8" H 7490 2725 50  0000 C CNN
@@ -483,12 +392,10 @@ F 1 "DIODE" H 7490 2634 50  0000 C CNN
 F 2 "Diode_SMD:D_SOD-323_HandSoldering" H 7490 2460 50  0001 C CNN
 F 3 "~" H 7490 2460 50  0001 C CNN
 	1    7490 2460
-	1    0    0    -1  
+	-1   0    0    -1  
 $EndComp
 Wire Wire Line
 	7790 1360 7790 1460
-Wire Wire Line
-	7690 1360 7790 1360
 $Comp
 L Switch:SW_DIP_x01 SW9
 U 1 1 5F86276D
@@ -501,7 +408,7 @@ F 3 "~" H 7790 1760 50  0001 C CNN
 	0    -1   -1   0   
 $EndComp
 $Comp
-L pspice:DIODE D9
+L Device:D D9
 U 1 1 5F8625DD
 P 7490 1360
 F 0 "D9" H 7490 1625 50  0000 C CNN
@@ -509,14 +416,12 @@ F 1 "DIODE" H 7490 1534 50  0000 C CNN
 F 2 "Diode_SMD:D_SOD-323_HandSoldering" H 7490 1360 50  0001 C CNN
 F 3 "~" H 7490 1360 50  0001 C CNN
 	1    7490 1360
-	1    0    0    -1  
+	-1   0    0    -1  
 $EndComp
 Wire Wire Line
 	6500 5760 6500 5850
-Wire Wire Line
-	6400 5760 6500 5760
 $Comp
-L pspice:DIODE D10
+L Device:D D10
 U 1 1 5F857803
 P 6200 5760
 F 0 "D10" H 6200 6025 50  0000 C CNN
@@ -524,14 +429,12 @@ F 1 "DIODE" H 6200 5934 50  0000 C CNN
 F 2 "Diode_SMD:D_SOD-323_HandSoldering" H 6200 5760 50  0001 C CNN
 F 3 "~" H 6200 5760 50  0001 C CNN
 	1    6200 5760
-	1    0    0    -1  
+	-1   0    0    -1  
 $EndComp
 Wire Wire Line
 	6500 4660 6500 4760
-Wire Wire Line
-	6400 4660 6500 4660
 $Comp
-L pspice:DIODE D11
+L Device:D D11
 U 1 1 5F8577ED
 P 6200 4660
 F 0 "D11" H 6200 4925 50  0000 C CNN
@@ -539,12 +442,10 @@ F 1 "DIODE" H 6200 4834 50  0000 C CNN
 F 2 "Diode_SMD:D_SOD-323_HandSoldering" H 6200 4660 50  0001 C CNN
 F 3 "~" H 6200 4660 50  0001 C CNN
 	1    6200 4660
-	1    0    0    -1  
+	-1   0    0    -1  
 $EndComp
 Wire Wire Line
 	6500 3560 6500 3660
-Wire Wire Line
-	6400 3560 6500 3560
 $Comp
 L Switch:SW_DIP_x01 SW12
 U 1 1 5F8577E1
@@ -557,7 +458,7 @@ F 3 "~" H 6500 3960 50  0001 C CNN
 	0    -1   -1   0   
 $EndComp
 $Comp
-L pspice:DIODE D12
+L Device:D D12
 U 1 1 5F8577D7
 P 6200 3560
 F 0 "D12" H 6200 3825 50  0000 C CNN
@@ -565,12 +466,10 @@ F 1 "DIODE" H 6200 3734 50  0000 C CNN
 F 2 "Diode_SMD:D_SOD-323_HandSoldering" H 6200 3560 50  0001 C CNN
 F 3 "~" H 6200 3560 50  0001 C CNN
 	1    6200 3560
-	1    0    0    -1  
+	-1   0    0    -1  
 $EndComp
 Wire Wire Line
 	6500 2460 6500 2560
-Wire Wire Line
-	6400 2460 6500 2460
 $Comp
 L Switch:SW_DIP_x01 SW13
 U 1 1 5F8577CB
@@ -583,7 +482,7 @@ F 3 "~" H 6500 2860 50  0001 C CNN
 	0    -1   -1   0   
 $EndComp
 $Comp
-L pspice:DIODE D13
+L Device:D D13
 U 1 1 5F8577C1
 P 6200 2460
 F 0 "D13" H 6200 2725 50  0000 C CNN
@@ -591,12 +490,10 @@ F 1 "DIODE" H 6200 2634 50  0000 C CNN
 F 2 "Diode_SMD:D_SOD-323_HandSoldering" H 6200 2460 50  0001 C CNN
 F 3 "~" H 6200 2460 50  0001 C CNN
 	1    6200 2460
-	1    0    0    -1  
+	-1   0    0    -1  
 $EndComp
 Wire Wire Line
 	6500 1360 6500 1460
-Wire Wire Line
-	6400 1360 6500 1360
 $Comp
 L Switch:SW_DIP_x01 SW14
 U 1 1 5F8577B5
@@ -609,7 +506,7 @@ F 3 "~" H 6500 1760 50  0001 C CNN
 	0    -1   -1   0   
 $EndComp
 $Comp
-L pspice:DIODE D14
+L Device:D D14
 U 1 1 5F8576C5
 P 6200 1360
 F 0 "D14" H 6200 1625 50  0000 C CNN
@@ -617,12 +514,10 @@ F 1 "DIODE" H 6200 1534 50  0000 C CNN
 F 2 "Diode_SMD:D_SOD-323_HandSoldering" H 6200 1360 50  0001 C CNN
 F 3 "~" H 6200 1360 50  0001 C CNN
 	1    6200 1360
-	1    0    0    -1  
+	-1   0    0    -1  
 $EndComp
 Wire Wire Line
 	5290 5760 5290 5850
-Wire Wire Line
-	5190 5760 5290 5760
 $Comp
 L Switch:SW_DIP_x01 SW15
 U 1 1 5F85160B
@@ -635,7 +530,7 @@ F 3 "~" H 5290 6150 50  0001 C CNN
 	0    -1   -1   0   
 $EndComp
 $Comp
-L pspice:DIODE D15
+L Device:D D15
 U 1 1 5F85153B
 P 4990 5760
 F 0 "D15" H 4990 6025 50  0000 C CNN
@@ -643,12 +538,10 @@ F 1 "DIODE" H 4990 5934 50  0000 C CNN
 F 2 "Diode_SMD:D_SOD-323_HandSoldering" H 4990 5760 50  0001 C CNN
 F 3 "~" H 4990 5760 50  0001 C CNN
 	1    4990 5760
-	1    0    0    -1  
+	-1   0    0    -1  
 $EndComp
 Wire Wire Line
 	5290 4660 5290 4760
-Wire Wire Line
-	5190 4660 5290 4660
 $Comp
 L Switch:SW_DIP_x01 SW16
 U 1 1 5F8495F0
@@ -661,7 +554,7 @@ F 3 "~" H 5290 5060 50  0001 C CNN
 	0    -1   -1   0   
 $EndComp
 $Comp
-L pspice:DIODE D16
+L Device:D D16
 U 1 1 5F8495E6
 P 4990 4660
 F 0 "D16" H 4990 4925 50  0000 C CNN
@@ -669,12 +562,10 @@ F 1 "DIODE" H 4990 4834 50  0000 C CNN
 F 2 "Diode_SMD:D_SOD-323_HandSoldering" H 4990 4660 50  0001 C CNN
 F 3 "~" H 4990 4660 50  0001 C CNN
 	1    4990 4660
-	1    0    0    -1  
+	-1   0    0    -1  
 $EndComp
 Wire Wire Line
 	5290 3560 5290 3660
-Wire Wire Line
-	5190 3560 5290 3560
 $Comp
 L Switch:SW_DIP_x01 SW17
 U 1 1 5F8495DA
@@ -687,7 +578,7 @@ F 3 "~" H 5290 3960 50  0001 C CNN
 	0    -1   -1   0   
 $EndComp
 $Comp
-L pspice:DIODE D17
+L Device:D D17
 U 1 1 5F849582
 P 4990 3560
 F 0 "D17" H 4990 3825 50  0000 C CNN
@@ -695,12 +586,10 @@ F 1 "DIODE" H 4990 3734 50  0000 C CNN
 F 2 "Diode_SMD:D_SOD-323_HandSoldering" H 4990 3560 50  0001 C CNN
 F 3 "~" H 4990 3560 50  0001 C CNN
 	1    4990 3560
-	1    0    0    -1  
+	-1   0    0    -1  
 $EndComp
 Wire Wire Line
 	5290 2460 5290 2560
-Wire Wire Line
-	5190 2460 5290 2460
 $Comp
 L Switch:SW_DIP_x01 SW18
 U 1 1 5F8436F6
@@ -713,7 +602,7 @@ F 3 "~" H 5290 2860 50  0001 C CNN
 	0    -1   -1   0   
 $EndComp
 $Comp
-L pspice:DIODE D18
+L Device:D D18
 U 1 1 5F8436EC
 P 4990 2460
 F 0 "D18" H 4990 2725 50  0000 C CNN
@@ -721,14 +610,12 @@ F 1 "DIODE" H 4990 2634 50  0000 C CNN
 F 2 "Diode_SMD:D_SOD-323_HandSoldering" H 4990 2460 50  0001 C CNN
 F 3 "~" H 4990 2460 50  0001 C CNN
 	1    4990 2460
-	1    0    0    -1  
+	-1   0    0    -1  
 $EndComp
 Wire Wire Line
 	5290 1360 5290 1460
-Wire Wire Line
-	5190 1360 5290 1360
 $Comp
-L pspice:DIODE D19
+L Device:D D19
 U 1 1 5F8324EB
 P 4990 1360
 F 0 "D19" H 4990 1625 50  0000 C CNN
@@ -736,7 +623,7 @@ F 1 "DIODE" H 4990 1534 50  0000 C CNN
 F 2 "Diode_SMD:D_SOD-323_HandSoldering" H 4990 1360 50  0001 C CNN
 F 3 "~" H 4990 1360 50  0001 C CNN
 	1    4990 1360
-	1    0    0    -1  
+	-1   0    0    -1  
 $EndComp
 Wire Wire Line
 	5290 6450 1420 6450
@@ -748,8 +635,6 @@ Wire Wire Line
 	1420 4260 2880 4260
 Connection ~ 4090 4260
 Connection ~ 4090 3160
-Wire Wire Line
-	2780 2460 2880 2460
 Wire Wire Line
 	2880 2460 2880 2560
 $Comp
@@ -767,7 +652,7 @@ Wire Wire Line
 	1420 3160 2880 3160
 Connection ~ 2880 3160
 $Comp
-L pspice:DIODE D24
+L Device:D D24
 U 1 1 6049254E
 P 2580 3490
 F 0 "D24" H 2580 3755 50  0000 C CNN
@@ -775,7 +660,7 @@ F 1 "DIODE" H 2580 3664 50  0000 C CNN
 F 2 "Diode_SMD:D_SOD-323_HandSoldering" H 2580 3490 50  0001 C CNN
 F 3 "~" H 2580 3490 50  0001 C CNN
 	1    2580 3490
-	1    0    0    -1  
+	-1   0    0    -1  
 $EndComp
 $Comp
 L Switch:SW_DIP_x01 SW24
@@ -788,13 +673,8 @@ F 3 "~" H 2880 3870 50  0001 C CNN
 	1    2880 3870
 	0    -1   -1   0   
 $EndComp
-Connection ~ 2380 1360
-Wire Wire Line
-	2380 2460 2380 3490
-Wire Wire Line
-	2380 1360 2380 2460
 $Comp
-L pspice:DIODE D25
+L Device:D D25
 U 1 1 5F901F17
 P 2580 2460
 F 0 "D25" H 2580 2725 50  0000 C CNN
@@ -802,11 +682,8 @@ F 1 "DIODE" H 2580 2634 50  0000 C CNN
 F 2 "Diode_SMD:D_SOD-323_HandSoldering" H 2580 2460 50  0001 C CNN
 F 3 "~" H 2580 2460 50  0001 C CNN
 	1    2580 2460
-	1    0    0    -1  
+	-1   0    0    1   
 $EndComp
-Connection ~ 2380 2460
-Wire Wire Line
-	2780 3490 2880 3490
 Wire Wire Line
 	2880 3490 2880 3570
 Wire Wire Line
@@ -818,21 +695,6 @@ Connection ~ 2880 2060
 Wire Wire Line
 	2380 870  2380 790 
 Connection ~ 2380 870 
-Wire Wire Line
-	3590 1360 3590 1220
-Connection ~ 3590 1360
-Wire Wire Line
-	4790 1360 4790 1230
-Connection ~ 4790 1360
-Wire Wire Line
-	6000 1360 6000 1220
-Connection ~ 6000 1360
-Wire Wire Line
-	7290 1360 7290 1220
-Connection ~ 7290 1360
-Wire Wire Line
-	8490 1360 8490 1220
-Connection ~ 8490 1360
 Text HLabel 2380 790  1    50   Input ~ 0
 col0
 Text HLabel 3590 1220 1    50   Input ~ 0
@@ -974,4 +836,200 @@ F 3 "~" H 6500 6150 50  0001 C CNN
 $EndComp
 Text Notes 4180 6890 0    50   ~ 0
 Annotations of switches are tied to the mechanical model.\nDO NOT REANNOTATE.
+Wire Wire Line
+	9690 870  9690 4670
+Wire Wire Line
+	8490 1220 8490 1360
+Wire Wire Line
+	3590 1220 3590 1360
+Wire Wire Line
+	7290 1220 7290 1360
+Wire Wire Line
+	6000 1220 6000 1360
+Wire Wire Line
+	4790 1230 4790 1360
+Wire Wire Line
+	2730 2460 2880 2460
+Wire Wire Line
+	2430 2460 2380 2460
+Connection ~ 2380 2460
+Wire Wire Line
+	2380 2460 2380 3490
+Wire Wire Line
+	2380 3490 2430 3490
+Wire Wire Line
+	2730 3490 2880 3490
+Wire Wire Line
+	3640 1360 3590 1360
+Connection ~ 3590 1360
+Wire Wire Line
+	3590 1360 3590 2460
+Wire Wire Line
+	3940 1360 4090 1360
+Wire Wire Line
+	3940 2460 4090 2460
+Wire Wire Line
+	3640 2460 3590 2460
+Connection ~ 3590 2460
+Wire Wire Line
+	3590 2460 3590 3560
+Wire Wire Line
+	3640 3560 3590 3560
+Connection ~ 3590 3560
+Wire Wire Line
+	3590 3560 3590 4660
+Wire Wire Line
+	3940 3560 4090 3560
+Wire Wire Line
+	3640 4660 3590 4660
+Wire Wire Line
+	3940 4660 4090 4660
+Wire Wire Line
+	6350 1360 6500 1360
+Wire Wire Line
+	6050 1360 6000 1360
+Connection ~ 6000 1360
+Wire Wire Line
+	6000 1360 6000 2460
+Wire Wire Line
+	6050 2460 6000 2460
+Connection ~ 6000 2460
+Wire Wire Line
+	6000 2460 6000 3560
+Wire Wire Line
+	6350 2460 6500 2460
+Wire Wire Line
+	6350 3560 6500 3560
+Wire Wire Line
+	6050 3560 6000 3560
+Connection ~ 6000 3560
+Wire Wire Line
+	6000 3560 6000 4660
+Wire Wire Line
+	6050 4660 6000 4660
+Connection ~ 6000 4660
+Wire Wire Line
+	6000 4660 6000 5760
+Wire Wire Line
+	6350 4660 6500 4660
+Wire Wire Line
+	6350 5760 6500 5760
+Wire Wire Line
+	6050 5760 6000 5760
+Wire Wire Line
+	7340 1360 7290 1360
+Connection ~ 7290 1360
+Wire Wire Line
+	7290 1360 7290 2460
+Wire Wire Line
+	7640 1360 7790 1360
+Wire Wire Line
+	7340 2460 7290 2460
+Connection ~ 7290 2460
+Wire Wire Line
+	7290 2460 7290 3560
+Wire Wire Line
+	7640 2460 7790 2460
+Wire Wire Line
+	7340 3560 7290 3560
+Connection ~ 7290 3560
+Wire Wire Line
+	7290 3560 7290 4660
+Wire Wire Line
+	7640 3560 7790 3560
+Wire Wire Line
+	7640 4660 7790 4660
+Wire Wire Line
+	7340 4660 7290 4660
+Connection ~ 7290 4660
+Wire Wire Line
+	7290 4660 7290 5770
+Wire Wire Line
+	7340 5770 7290 5770
+Wire Wire Line
+	7640 5770 7790 5770
+Wire Wire Line
+	8540 1360 8490 1360
+Connection ~ 8490 1360
+Wire Wire Line
+	8490 1360 8490 2460
+Wire Wire Line
+	8840 1360 8990 1360
+Wire Wire Line
+	8540 2460 8490 2460
+Connection ~ 8490 2460
+Wire Wire Line
+	8490 2460 8490 3560
+Wire Wire Line
+	8840 2460 8990 2460
+Wire Wire Line
+	8540 3560 8490 3560
+Connection ~ 8490 3560
+Wire Wire Line
+	8490 3560 8490 4660
+Wire Wire Line
+	8840 3560 8990 3560
+Wire Wire Line
+	8540 4660 8490 4660
+Connection ~ 8490 4660
+Wire Wire Line
+	8490 4660 8490 5770
+Wire Wire Line
+	8840 4660 8990 4660
+Wire Wire Line
+	8840 5770 8990 5770
+Wire Wire Line
+	8540 5770 8490 5770
+Wire Wire Line
+	10040 5770 10190 5770
+Wire Wire Line
+	9740 5770 9690 5770
+Wire Wire Line
+	9740 4670 9690 4670
+Connection ~ 9690 4670
+Wire Wire Line
+	9690 4670 9690 5770
+Wire Wire Line
+	10040 4670 10190 4670
+Wire Wire Line
+	2380 870  2380 1360
+Wire Wire Line
+	2730 1360 2880 1360
+Wire Wire Line
+	2430 1360 2380 1360
+Connection ~ 2380 1360
+Wire Wire Line
+	2380 1360 2380 2460
+Wire Wire Line
+	5140 5760 5290 5760
+Wire Wire Line
+	4840 5760 4790 5760
+Wire Wire Line
+	5140 4660 5290 4660
+Wire Wire Line
+	5140 3560 5290 3560
+Wire Wire Line
+	4840 4660 4790 4660
+Connection ~ 4790 4660
+Wire Wire Line
+	4790 4660 4790 5760
+Wire Wire Line
+	4840 3560 4790 3560
+Connection ~ 4790 3560
+Wire Wire Line
+	4790 3560 4790 4660
+Wire Wire Line
+	5140 2460 5290 2460
+Wire Wire Line
+	4840 2460 4790 2460
+Connection ~ 4790 2460
+Wire Wire Line
+	4790 2460 4790 3560
+Wire Wire Line
+	5140 1360 5290 1360
+Wire Wire Line
+	4840 1360 4790 1360
+Connection ~ 4790 1360
+Wire Wire Line
+	4790 1360 4790 2460
 $EndSCHEMATC
