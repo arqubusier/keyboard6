@@ -319,27 +319,17 @@ NoConn ~ 3330 4230
 NoConn ~ 7230 4060
 Wire Wire Line
 	6740 5130 6300 5130
-Text HLabel 6470 5630 2    50   Input ~ 0
-row3
-Text HLabel 6470 5530 2    50   Input ~ 0
-row4
-Text HLabel 6470 5730 2    50   Input ~ 0
-row2
-Text HLabel 6470 5830 2    50   Input ~ 0
-row1
-Text HLabel 6470 5930 2    50   Input ~ 0
-row0
-Text HLabel 6470 4030 2    50   Output ~ 0
+Text HLabel 6470 5430 2    50   Output ~ 0
 col5
-Text HLabel 6470 3930 2    50   Output ~ 0
+Text HLabel 6470 5530 2    50   Output ~ 0
 col4
-Text HLabel 6470 3630 2    50   Output ~ 0
+Text HLabel 6470 5630 2    50   Output ~ 0
 col3
-Text HLabel 6470 3530 2    50   Output ~ 0
+Text HLabel 6470 5730 2    50   Output ~ 0
 col2
-Text HLabel 6470 3430 2    50   Output ~ 0
+Text HLabel 6470 5830 2    50   Output ~ 0
 col1
-Text HLabel 6470 4930 2    50   Output ~ 0
+Text HLabel 6470 5930 2    50   Output ~ 0
 col0
 Wire Wire Line
 	6470 3530 6300 3530
@@ -366,7 +356,6 @@ NoConn ~ 6300 4330
 NoConn ~ 6300 4530
 NoConn ~ 6300 4630
 NoConn ~ 6300 4730
-NoConn ~ 6300 5430
 Wire Wire Line
 	2930 4430 2930 4510
 Wire Wire Line
@@ -388,7 +377,7 @@ U 1 1 6068AC98
 P 4530 2880
 F 0 "SW30" H 4530 3165 50  0000 C CNN
 F 1 "SW_Push_Dual" H 4530 3074 50  0000 C CNN
-F 2 "keyboard6:schurter sms gullwing lead" H 4530 3080 50  0001 C CNN
+F 2 "keyboard6:C_K_PTS641SP31SMTR2LFS" H 4530 3080 50  0001 C CNN
 F 3 "~" H 4530 3080 50  0001 C CNN
 	1    4530 2880
 	1    0    0    -1  
@@ -441,4 +430,17 @@ NoConn ~ 6300 5230
 Wire Wire Line
 	6470 4930 6300 4930
 NoConn ~ 6300 4830
+Text HLabel 6470 3630 2    50   Input ~ 0
+row3
+Text HLabel 6470 3930 2    50   Input ~ 0
+row4
+Text HLabel 6470 3530 2    50   Input ~ 0
+row2
+Text HLabel 6470 3430 2    50   Input ~ 0
+row1
+Text HLabel 6470 4930 2    50   Input ~ 0
+row0
+Wire Wire Line
+	6470 5430 6300 5430
+NoConn ~ 6470 4030
 $EndSCHEMATC

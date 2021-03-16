@@ -26,12 +26,12 @@ def place_switches(l):
         sw_module.SetOrientationDegrees(0)
         sw_module.SetPosition(point)
 
-        d_x = x - 4
+        d_x = x - 2
         d_y = y + 4
         d = 'D' + str(n)
         d_module = board.FindModuleByReference(d)
         point = pcbnew.wxPoint(FromMM(d_x), FromMM(d_y))
-        d_module.SetOrientationDegrees(0)
+        #d_module.SetOrientationDegrees(0)
         d_module.SetPosition(point)
 
         n += 1
