@@ -16,233 +16,180 @@ $EndDescr
 $Comp
 L Connector:USB_B_Micro J2
 U 1 1 6067D3AF
-P 3030 4030
-F 0 "J2" H 3087 4497 50  0000 C CNN
-F 1 "USB_B_Micro" H 3087 4406 50  0000 C CNN
-F 2 "keyboard6:USB_mini_b_TE_ 1734035-2" H 3180 3980 50  0001 C CNN
-F 3 "~" H 3180 3980 50  0001 C CNN
-	1    3030 4030
+P 2860 4540
+F 0 "J2" H 2917 5007 50  0000 C CNN
+F 1 "USB_B_Micro" H 2917 4916 50  0000 C CNN
+F 2 "keyboard6:USB_mini_b_TE_ 1734035-2" H 3010 4490 50  0001 C CNN
+F 3 "~" H 3010 4490 50  0001 C CNN
+	1    2860 4540
 	1    0    0    -1  
 $EndComp
 $Comp
 L Device:C C3
 U 1 1 606865AF
-P 2360 3250
-F 0 "C3" H 2475 3296 50  0000 L CNN
-F 1 "0.1u" H 2475 3205 50  0000 L CNN
-F 2 "Capacitor_SMD:C_0805_2012Metric_Pad1.18x1.45mm_HandSolder" H 2398 3100 50  0001 C CNN
-F 3 "~" H 2360 3250 50  0001 C CNN
-	1    2360 3250
+P 2190 3760
+F 0 "C3" H 2305 3806 50  0000 L CNN
+F 1 "0.1u" H 2305 3715 50  0000 L CNN
+F 2 "Capacitor_SMD:C_0805_2012Metric_Pad1.18x1.45mm_HandSolder" H 2228 3610 50  0001 C CNN
+F 3 "~" H 2190 3760 50  0001 C CNN
+	1    2190 3760
 	1    0    0    -1  
 $EndComp
 $Comp
 L Device:C C6
 U 1 1 606867B0
-P 4550 3780
-F 0 "C6" H 4665 3826 50  0000 L CNN
-F 1 "0.1u" H 4665 3735 50  0000 L CNN
-F 2 "Capacitor_SMD:C_0805_2012Metric_Pad1.18x1.45mm_HandSolder" H 4588 3630 50  0001 C CNN
-F 3 "~" H 4550 3780 50  0001 C CNN
-	1    4550 3780
-	1    0    0    -1  
+P 4680 3630
+F 0 "C6" V 4600 3700 50  0000 L CNN
+F 1 "0.1u" V 4730 3700 50  0000 L CNN
+F 2 "Capacitor_SMD:C_0805_2012Metric_Pad1.18x1.45mm_HandSolder" H 4718 3480 50  0001 C CNN
+F 3 "~" H 4680 3630 50  0001 C CNN
+	1    4680 3630
+	0    1    1    0   
 $EndComp
 $Comp
 L Device:C C4
 U 1 1 60686B4F
-P 1630 3260
-F 0 "C4" H 1745 3306 50  0000 L CNN
-F 1 "10u" H 1745 3215 50  0000 L CNN
-F 2 "Capacitor_SMD:C_0805_2012Metric_Pad1.18x1.45mm_HandSolder" H 1668 3110 50  0001 C CNN
-F 3 "~" H 1630 3260 50  0001 C CNN
-	1    1630 3260
+P 1460 3770
+F 0 "C4" H 1575 3816 50  0000 L CNN
+F 1 "10u" H 1575 3725 50  0000 L CNN
+F 2 "Capacitor_SMD:C_0805_2012Metric_Pad1.18x1.45mm_HandSolder" H 1498 3620 50  0001 C CNN
+F 3 "~" H 1460 3770 50  0001 C CNN
+	1    1460 3770
 	1    0    0    -1  
 $EndComp
 $Comp
 L Device:R R1
 U 1 1 60687B97
-P 4990 2680
-F 0 "R1" H 5060 2726 50  0000 L CNN
-F 1 "4.7k" H 5060 2635 50  0000 L CNN
-F 2 "Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder" V 4920 2680 50  0001 C CNN
-F 3 "~" H 4990 2680 50  0001 C CNN
-	1    4990 2680
+P 4870 2680
+F 0 "R1" H 4940 2726 50  0000 L CNN
+F 1 "4.7k" H 4940 2635 50  0000 L CNN
+F 2 "Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder" V 4800 2680 50  0001 C CNN
+F 3 "~" H 4870 2680 50  0001 C CNN
+	1    4870 2680
 	1    0    0    -1  
 $EndComp
 $Comp
 L Device:R R3
 U 1 1 60688329
-P 4120 4130
-F 0 "R3" V 4210 4130 50  0000 C CNN
-F 1 "22" V 4310 4130 50  0000 C CNN
-F 2 "Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder" V 4050 4130 50  0001 C CNN
-F 3 "~" H 4120 4130 50  0001 C CNN
-	1    4120 4130
+P 3880 4640
+F 0 "R3" V 3970 4640 50  0000 C CNN
+F 1 "22" V 4070 4640 50  0000 C CNN
+F 2 "Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder" V 3810 4640 50  0001 C CNN
+F 3 "~" H 3880 4640 50  0001 C CNN
+	1    3880 4640
 	0    1    1    0   
 $EndComp
 $Comp
 L Device:R R2
 U 1 1 60688965
-P 3940 4030
-F 0 "R2" V 3733 4030 50  0000 C CNN
-F 1 "22" V 3824 4030 50  0000 C CNN
-F 2 "Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder" V 3870 4030 50  0001 C CNN
-F 3 "~" H 3940 4030 50  0001 C CNN
-	1    3940 4030
+P 3880 4540
+F 0 "R2" V 3673 4540 50  0000 C CNN
+F 1 "22" V 3764 4540 50  0000 C CNN
+F 2 "Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder" V 3810 4540 50  0001 C CNN
+F 3 "~" H 3880 4540 50  0001 C CNN
+	1    3880 4540
 	0    1    1    0   
 $EndComp
 Wire Wire Line
-	7330 4430 7330 4060
-Wire Wire Line
-	4790 2880 4790 3030
-Wire Wire Line
-	4790 3080 4790 3030
-Connection ~ 4790 3030
+	7300 3730 7300 3380
 $Comp
 L power:GND #PWR01
 U 1 1 607155A7
-P 2360 4720
-F 0 "#PWR01" H 2360 4470 50  0001 C CNN
-F 1 "GND" H 2365 4547 50  0000 C CNN
-F 2 "" H 2360 4720 50  0001 C CNN
-F 3 "" H 2360 4720 50  0001 C CNN
-	1    2360 4720
+P 2190 5230
+F 0 "#PWR01" H 2190 4980 50  0001 C CNN
+F 1 "GND" H 2195 5057 50  0000 C CNN
+F 2 "" H 2190 5230 50  0001 C CNN
+F 3 "" H 2190 5230 50  0001 C CNN
+	1    2190 5230
 	1    0    0    -1  
 $EndComp
 Wire Wire Line
-	3030 4720 3030 4510
+	2860 5230 2860 5020
 Wire Wire Line
-	2360 4720 3030 4720
-Text GLabel 2550 4720 3    50   Input ~ 0
+	2190 5230 2860 5230
+Text GLabel 2380 5230 3    50   Input ~ 0
 GND1
-Text GLabel 7130 4100 3    50   Input ~ 0
+Text GLabel 7100 3420 3    50   Input ~ 0
 GND1
-Text GLabel 3750 3350 0    50   Input ~ 0
+Text GLabel 3700 3350 0    50   Input ~ 0
 GND1
-Wire Wire Line
-	4090 4030 5100 4030
-Wire Wire Line
-	6300 4430 7330 4430
-Wire Wire Line
-	4790 3030 4990 3030
-Wire Wire Line
-	5100 4130 4270 4130
-Wire Wire Line
-	3330 3830 3330 3020
-Text GLabel 2820 2580 1    50   Input ~ 0
-VBUS
-Text GLabel 5090 3830 0    50   Input ~ 0
-VBUS
-Wire Wire Line
-	5100 3830 5090 3830
-Text GLabel 5700 2350 1    50   Input ~ 0
-VBUS
-Wire Wire Line
-	5600 2730 5600 2660
-Wire Wire Line
-	5600 2660 5700 2660
-Wire Wire Line
-	5700 2660 5700 2730
-Wire Wire Line
-	5700 2660 5800 2660
-Wire Wire Line
-	5800 2660 5800 2730
-Connection ~ 5700 2660
-Wire Wire Line
-	5700 2660 5700 2420
-Text GLabel 7430 4100 3    50   Input ~ 0
-VBUS
-Wire Wire Line
-	2820 2580 2820 2720
+Text GLabel 2800 3530 1    50   Input ~ 0
+UVCC
+Text GLabel 4150 3830 0    50   Input ~ 0
+UVCC
+Text GLabel 4870 2420 1    50   Input ~ 0
+UVCC
+Text GLabel 7400 3420 3    50   Input ~ 0
+UVCC
 $Comp
 L Device:Fuse F1
 U 1 1 60840793
-P 2820 2870
-F 0 "F1" H 2880 2916 50  0000 L CNN
-F 1 "500m" H 2880 2825 50  0000 L CNN
-F 2 "Fuse:Fuse_0603_1608Metric" V 2750 2870 50  0001 C CNN
-F 3 "~" H 2820 2870 50  0001 C CNN
-	1    2820 2870
+P 3160 3850
+F 0 "F1" H 3220 3896 50  0000 L CNN
+F 1 "500m" H 3220 3805 50  0000 L CNN
+F 2 "Fuse:Fuse_0603_1608Metric" V 3090 3850 50  0001 C CNN
+F 3 "~" H 3160 3850 50  0001 C CNN
+	1    3160 3850
 	1    0    0    -1  
 $EndComp
-Connection ~ 2820 3020
 Wire Wire Line
-	2820 3020 3330 3020
+	2190 5220 2190 4040
 Wire Wire Line
-	2360 4710 2360 3530
+	1790 3910 1790 4040
 Wire Wire Line
-	1960 3400 1960 3530
+	1790 4040 2190 4040
+Connection ~ 2190 4040
 Wire Wire Line
-	1960 3530 2360 3530
-Connection ~ 2360 3530
+	2190 4040 2190 3910
 Wire Wire Line
-	2360 3530 2360 3400
+	2190 3530 2190 3610
 Wire Wire Line
-	2360 3020 2360 3100
+	2190 3530 1790 3530
 Wire Wire Line
-	2360 3020 1960 3020
-Wire Wire Line
-	1960 3020 1960 3100
-Connection ~ 2360 3020
+	1790 3530 1790 3610
+Connection ~ 2190 3530
 $Comp
 L Device:C C2
 U 1 1 60686208
-P 1960 3250
-F 0 "C2" H 2075 3296 50  0000 L CNN
-F 1 "1u" H 2075 3205 50  0000 L CNN
-F 2 "Capacitor_SMD:C_0805_2012Metric_Pad1.18x1.45mm_HandSolder" H 1998 3100 50  0001 C CNN
-F 3 "~" H 1960 3250 50  0001 C CNN
-	1    1960 3250
+P 1790 3760
+F 0 "C2" H 1905 3806 50  0000 L CNN
+F 1 "1u" H 1905 3715 50  0000 L CNN
+F 2 "Capacitor_SMD:C_0805_2012Metric_Pad1.18x1.45mm_HandSolder" H 1828 3610 50  0001 C CNN
+F 3 "~" H 1790 3760 50  0001 C CNN
+	1    1790 3760
 	1    0    0    -1  
 $EndComp
 Wire Wire Line
-	1960 3020 1630 3020
+	1790 3530 1460 3530
 Wire Wire Line
-	1630 3020 1630 3110
-Connection ~ 1960 3020
+	1460 3530 1460 3620
+Connection ~ 1790 3530
 Wire Wire Line
-	1630 3410 1630 3530
+	1460 3920 1460 4040
 Wire Wire Line
-	1630 3530 1960 3530
-Connection ~ 1960 3530
+	1460 4040 1790 4040
+Connection ~ 1790 4040
 Wire Wire Line
-	4990 2830 4990 3030
-Connection ~ 4990 3030
-Wire Wire Line
-	4990 3030 5100 3030
-Wire Wire Line
-	4990 2530 4990 2420
-Wire Wire Line
-	4990 2420 5410 2420
-Connection ~ 5700 2420
-Wire Wire Line
-	5700 2420 5700 2350
-Text GLabel 4480 3930 0    50   Input ~ 0
+	4870 2530 4870 2420
+Text GLabel 4500 3630 0    50   Input ~ 0
 GND1
-Wire Wire Line
-	4550 3630 5100 3630
 $Comp
 L Device:C C7
 U 1 1 609349BE
-P 4790 4480
-F 0 "C7" H 4905 4526 50  0000 L CNN
-F 1 "1u" H 4905 4435 50  0000 L CNN
-F 2 "Capacitor_SMD:C_0805_2012Metric_Pad1.18x1.45mm_HandSolder" H 4828 4330 50  0001 C CNN
-F 3 "~" H 4790 4480 50  0001 C CNN
-	1    4790 4480
+P 4920 4480
+F 0 "C7" H 5035 4526 50  0000 L CNN
+F 1 "1u" H 5035 4435 50  0000 L CNN
+F 2 "Capacitor_SMD:C_0805_2012Metric_Pad1.18x1.45mm_HandSolder" H 4958 4330 50  0001 C CNN
+F 3 "~" H 4920 4480 50  0001 C CNN
+	1    4920 4480
 	1    0    0    -1  
 $EndComp
-Wire Wire Line
-	5100 4330 4790 4330
-Text GLabel 4790 4630 0    50   Input ~ 0
+Text GLabel 4920 4630 3    50   Input ~ 0
 GND1
 Wire Wire Line
-	4480 3930 4550 3930
+	4500 3630 4530 3630
 Text GLabel 5470 6430 0    50   Input ~ 0
 GND1
-Wire Wire Line
-	5600 6330 5600 6430
-Wire Wire Line
-	5700 6330 5700 6430
 Wire Wire Line
 	5700 6430 5600 6430
 Connection ~ 5600 6430
@@ -251,23 +198,23 @@ Wire Wire Line
 $Comp
 L Device:C C1
 U 1 1 60983234
-P 4030 3230
-F 0 "C1" V 3870 3160 50  0000 C CNN
-F 1 "16p" V 3870 3310 50  0000 C CNN
-F 2 "Capacitor_SMD:C_0805_2012Metric_Pad1.18x1.45mm_HandSolder" H 4068 3080 50  0001 C CNN
-F 3 "~" H 4030 3230 50  0001 C CNN
-	1    4030 3230
+P 3990 3230
+F 0 "C1" V 3830 3160 50  0000 C CNN
+F 1 "16p" V 3830 3310 50  0000 C CNN
+F 2 "Capacitor_SMD:C_0805_2012Metric_Pad1.18x1.45mm_HandSolder" H 4028 3080 50  0001 C CNN
+F 3 "~" H 3990 3230 50  0001 C CNN
+	1    3990 3230
 	0    1    1    0   
 $EndComp
 $Comp
 L Device:C C5
 U 1 1 60984579
-P 4030 3450
-F 0 "C5" V 4180 3380 50  0000 C CNN
-F 1 "16p" V 4180 3550 50  0000 C CNN
-F 2 "Capacitor_SMD:C_0805_2012Metric_Pad1.18x1.45mm_HandSolder" H 4068 3300 50  0001 C CNN
-F 3 "~" H 4030 3450 50  0001 C CNN
-	1    4030 3450
+P 3990 3430
+F 0 "C5" V 4140 3360 50  0000 C CNN
+F 1 "16p" V 4140 3530 50  0000 C CNN
+F 2 "Capacitor_SMD:C_0805_2012Metric_Pad1.18x1.45mm_HandSolder" H 4028 3280 50  0001 C CNN
+F 3 "~" H 3990 3430 50  0001 C CNN
+	1    3990 3430
 	0    1    1    0   
 $EndComp
 $Comp
@@ -282,43 +229,17 @@ F 3 "~" H 4470 3330 50  0001 C CNN
 	0    1    1    0   
 $EndComp
 Wire Wire Line
-	5100 3230 4470 3230
-$Comp
-L MCU_Microchip_ATmega:ATmega32U4-AU mcu1
-U 1 1 6067BB5F
-P 5700 4530
-F 0 "mcu1" H 5870 2750 50  0000 C CNN
-F 1 "ATmega32U4-AU" H 6090 2640 50  0000 C CNN
-F 2 "Package_QFP:TQFP-44_10x10mm_P0.8mm" H 5700 4530 50  0001 C CIN
-F 3 "http://ww1.microchip.com/downloads/en/DeviceDoc/Atmel-7766-8-bit-AVR-ATmega16U4-32U4_Datasheet.pdf" H 5700 4530 50  0001 C CNN
-	1    5700 4530
-	1    0    0    -1  
-$EndComp
-Wire Wire Line
-	5100 3430 4470 3430
-Wire Wire Line
-	4470 3230 4180 3230
+	4470 3230 4140 3230
 Connection ~ 4470 3230
-Wire Wire Line
-	4470 3430 4180 3430
-Wire Wire Line
-	4180 3430 4180 3450
 Connection ~ 4470 3430
 Wire Wire Line
-	3880 3230 3820 3230
+	3840 3230 3820 3230
 Wire Wire Line
 	3820 3230 3820 3350
 Wire Wire Line
-	3820 3350 3750 3350
-Wire Wire Line
-	3820 3350 3820 3450
-Wire Wire Line
-	3820 3450 3880 3450
-Connection ~ 3820 3350
-NoConn ~ 3330 4230
-NoConn ~ 7230 4060
-Wire Wire Line
-	6740 5130 6300 5130
+	3820 3350 3700 3350
+NoConn ~ 3160 4740
+NoConn ~ 7200 3380
 Text HLabel 6470 5430 2    50   Output ~ 0
 col5
 Text HLabel 6470 5530 2    50   Output ~ 0
@@ -332,104 +253,57 @@ col1
 Text HLabel 6470 5930 2    50   Output ~ 0
 col0
 Wire Wire Line
-	6470 3530 6300 3530
+	2760 4940 2760 5020
 Wire Wire Line
-	6300 3630 6470 3630
+	2760 5020 2860 5020
+Connection ~ 2860 5020
 Wire Wire Line
-	6470 4030 6300 4030
-Wire Wire Line
-	6470 5530 6300 5530
-Wire Wire Line
-	6470 5630 6300 5630
-Wire Wire Line
-	6300 5730 6470 5730
-Wire Wire Line
-	6470 5830 6300 5830
-Wire Wire Line
-	6300 5930 6470 5930
-NoConn ~ 6300 3030
-NoConn ~ 6300 3130
-NoConn ~ 6300 3230
-NoConn ~ 6300 3330
-NoConn ~ 6300 4230
-NoConn ~ 6300 4330
-NoConn ~ 6300 4530
-NoConn ~ 6300 4630
-NoConn ~ 6300 4730
-Wire Wire Line
-	2930 4430 2930 4510
-Wire Wire Line
-	2930 4510 3030 4510
-Connection ~ 3030 4510
-Wire Wire Line
-	3030 4510 3030 4430
+	2860 5020 2860 4940
 Text GLabel 6740 5130 2    50   Input ~ 0
 GND1
 Text Notes 6770 5050 0    50   ~ 0
 HWB tied to ground means that the\nbootloader will be executed \n(assuming correct WHBE fuse value)
-Wire Wire Line
-	4730 3080 4790 3080
-Wire Wire Line
-	4730 2880 4790 2880
 $Comp
 L Switch:SW_Push_Dual SW30
 U 1 1 6068AC98
-P 4530 2880
-F 0 "SW30" H 4530 3165 50  0000 C CNN
-F 1 "SW_Push_Dual" H 4530 3074 50  0000 C CNN
-F 2 "keyboard6:C_K_PTS641SP31SMTR2LFS" H 4530 3080 50  0001 C CNN
-F 3 "~" H 4530 3080 50  0001 C CNN
-	1    4530 2880
+P 4530 2830
+F 0 "SW30" H 4530 3115 50  0000 C CNN
+F 1 "SW_Push_Dual" H 4530 3024 50  0000 C CNN
+F 2 "keyboard6:SW_E_SW_TL_3303" H 4530 3030 50  0001 C CNN
+F 3 "~" H 4530 3030 50  0001 C CNN
+	1    4530 2830
 	1    0    0    -1  
 $EndComp
 Wire Wire Line
-	4330 2880 4330 3080
-Text GLabel 4330 2930 0    50   Input ~ 0
+	4330 2830 4330 3030
+Text GLabel 4330 2880 0    50   Input ~ 0
 GND1
-Wire Wire Line
-	2360 3020 2820 3020
-Wire Wire Line
-	3330 4030 3790 4030
-Wire Wire Line
-	3330 4130 3970 4130
 $Comp
 L Connector:AudioJack4 J1
 U 1 1 6068FFB3
-P 7230 3860
-F 0 "J1" V 7141 3530 50  0000 R CNN
-F 1 "AudioJack4" V 7232 3530 50  0000 R CNN
-F 2 "keyboard6:TRRS_smd_SparkFun_PRT-12639" H 7230 3860 50  0001 C CNN
-F 3 "~" H 7230 3860 50  0001 C CNN
-	1    7230 3860
+P 7200 3180
+F 0 "J1" V 7111 2850 50  0000 R CNN
+F 1 "AudioJack4" V 7202 2850 50  0000 R CNN
+F 2 "keyboard6:TRRS_smd_SparkFun_PRT-12639" H 7200 3180 50  0001 C CNN
+F 3 "~" H 7200 3180 50  0001 C CNN
+	1    7200 3180
 	0    -1   1    0   
 $EndComp
 Wire Wire Line
-	7130 4060 7130 4100
+	7100 3380 7100 3420
 Wire Wire Line
-	7430 4100 7430 4060
+	7400 3420 7400 3380
 $Comp
 L power:PWR_FLAG #FLG0101
 U 1 1 60C7D5DB
-P 5410 2420
-F 0 "#FLG0101" H 5410 2495 50  0001 C CNN
-F 1 "PWR_FLAG" H 5410 2593 50  0000 C CNN
-F 2 "" H 5410 2420 50  0001 C CNN
-F 3 "~" H 5410 2420 50  0001 C CNN
-	1    5410 2420
+P 3060 3530
+F 0 "#FLG0101" H 3060 3605 50  0001 C CNN
+F 1 "PWR_FLAG" H 3060 3703 50  0000 C CNN
+F 2 "" H 3060 3530 50  0001 C CNN
+F 3 "~" H 3060 3530 50  0001 C CNN
+	1    3060 3530
 	1    0    0    -1  
 $EndComp
-Connection ~ 5410 2420
-Wire Wire Line
-	5410 2420 5700 2420
-Wire Wire Line
-	6300 3430 6470 3430
-Wire Wire Line
-	6300 3930 6470 3930
-NoConn ~ 6300 3730
-NoConn ~ 6300 5230
-Wire Wire Line
-	6470 4930 6300 4930
-NoConn ~ 6300 4830
 Text HLabel 6470 3630 2    50   Input ~ 0
 row3
 Text HLabel 6470 3930 2    50   Input ~ 0
@@ -440,7 +314,229 @@ Text HLabel 6470 3430 2    50   Input ~ 0
 row1
 Text HLabel 6470 4930 2    50   Input ~ 0
 row0
+NoConn ~ 6470 4030
+Text Label 4090 4540 0    50   ~ 0
+USB_FULL_P
+Text Label 4090 4640 0    50   ~ 0
+USB_FULL_N
+Text Label 3210 4540 0    50   ~ 0
+USB_FULL1_P
+Text Label 3200 4640 0    50   ~ 0
+USB_FULL1_N
+Wire Wire Line
+	4140 3430 4470 3430
+Wire Wire Line
+	3820 3350 3820 3430
+Wire Wire Line
+	3820 3430 3840 3430
+Connection ~ 3820 3350
+Text Label 3160 4080 0    50   ~ 0
+VBUS
+Wire Wire Line
+	2190 3530 3060 3530
+Wire Wire Line
+	3160 3530 3160 3700
+Wire Wire Line
+	3160 4000 3160 4340
+$Comp
+L Device:C C13
+U 1 1 608DA9BC
+P 4360 3980
+F 0 "C13" H 4470 4030 50  0000 L CNN
+F 1 "0.1u" H 4470 3940 50  0000 L CNN
+F 2 "Capacitor_SMD:C_0805_2012Metric_Pad1.18x1.45mm_HandSolder" H 4398 3830 50  0001 C CNN
+F 3 "~" H 4360 3980 50  0001 C CNN
+	1    4360 3980
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:C C8
+U 1 1 608F07F8
+P 5960 2110
+F 0 "C8" H 6075 2156 50  0000 L CNN
+F 1 "0.1u" H 6075 2065 50  0000 L CNN
+F 2 "Capacitor_SMD:C_0805_2012Metric_Pad1.18x1.45mm_HandSolder" H 5998 1960 50  0001 C CNN
+F 3 "~" H 5960 2110 50  0001 C CNN
+	1    5960 2110
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:C C9
+U 1 1 608FD6B9
+P 6390 2110
+F 0 "C9" H 6505 2156 50  0000 L CNN
+F 1 "0.1u" H 6505 2065 50  0000 L CNN
+F 2 "Capacitor_SMD:C_0805_2012Metric_Pad1.18x1.45mm_HandSolder" H 6428 1960 50  0001 C CNN
+F 3 "~" H 6390 2110 50  0001 C CNN
+	1    6390 2110
+	1    0    0    -1  
+$EndComp
+Connection ~ 3060 3530
+Wire Wire Line
+	3060 3530 3160 3530
+Wire Wire Line
+	6390 1960 5960 1960
+Text GLabel 6170 1960 1    50   Input ~ 0
+UVCC
+Text Notes 6750 1990 0    50   ~ 0
+The double capacitors are for the hidden power pins.\nThese should be routed to the respective pins separately.
+Text GLabel 6620 2550 1    50   Input ~ 0
+UVCC
+Wire Wire Line
+	6360 2550 6790 2550
+Wire Wire Line
+	6360 2850 6790 2850
+$Comp
+L Device:C C12
+U 1 1 608F1A83
+P 6790 2700
+F 0 "C12" H 6905 2746 50  0000 L CNN
+F 1 "0.1u" H 6905 2655 50  0000 L CNN
+F 2 "Capacitor_SMD:C_0805_2012Metric_Pad1.18x1.45mm_HandSolder" H 6828 2550 50  0001 C CNN
+F 3 "~" H 6790 2700 50  0001 C CNN
+	1    6790 2700
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:C C11
+U 1 1 608F0DE8
+P 6360 2700
+F 0 "C11" H 6475 2746 50  0000 L CNN
+F 1 "0.1u" H 6475 2655 50  0000 L CNN
+F 2 "Capacitor_SMD:C_0805_2012Metric_Pad1.18x1.45mm_HandSolder" H 6398 2550 50  0001 C CNN
+F 3 "~" H 6360 2700 50  0001 C CNN
+	1    6360 2700
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	5700 1960 5960 1960
+Connection ~ 5960 1960
+Wire Wire Line
+	5960 2260 6390 2260
+Wire Wire Line
+	5800 2550 6360 2550
+Connection ~ 6360 2550
+Wire Wire Line
+	4730 2830 4870 2830
+Wire Wire Line
+	4730 3030 4870 3030
+Wire Wire Line
+	4870 2830 4870 3030
+Connection ~ 4870 2830
+Connection ~ 4870 3030
+Text GLabel 6170 2260 3    50   Input ~ 0
+GND1
+Text GLabel 6580 2850 3    50   Input ~ 0
+GND1
+NoConn ~ 6300 3130
+NoConn ~ 6300 3030
+Wire Wire Line
+	5100 4330 4920 4330
+Wire Wire Line
+	5600 6330 5600 6430
+Wire Wire Line
+	4830 3630 5100 3630
 Wire Wire Line
 	6470 5430 6300 5430
-NoConn ~ 6470 4030
+Wire Wire Line
+	6470 5530 6300 5530
+Wire Wire Line
+	6470 5630 6300 5630
+Wire Wire Line
+	6300 5730 6470 5730
+Wire Wire Line
+	6470 5830 6300 5830
+Wire Wire Line
+	6300 5930 6470 5930
+Wire Wire Line
+	6740 5130 6300 5130
+Wire Wire Line
+	6470 4030 6300 4030
+Wire Wire Line
+	6300 3930 6470 3930
+Wire Wire Line
+	6300 3630 6470 3630
+Wire Wire Line
+	6470 3530 6300 3530
+Wire Wire Line
+	6300 3430 6470 3430
+Wire Wire Line
+	6470 4930 6300 4930
+NoConn ~ 6300 4830
+NoConn ~ 6300 4630
+Wire Wire Line
+	5800 2730 5800 2550
+NoConn ~ 6300 4730
+NoConn ~ 6300 4530
+NoConn ~ 6300 4430
+NoConn ~ 6300 4330
+NoConn ~ 6300 4230
+Wire Wire Line
+	5100 3230 4470 3230
+Wire Wire Line
+	5100 3430 4470 3430
+Wire Wire Line
+	5700 6330 5700 6430
+Wire Wire Line
+	5700 2730 5700 1960
+Wire Wire Line
+	4870 3030 5100 3030
+Wire Wire Line
+	7300 3730 6300 3730
+NoConn ~ 6300 3330
+NoConn ~ 6300 3230
+NoConn ~ 6300 5230
+Text GLabel 5210 2260 3    50   Input ~ 0
+GND1
+$Comp
+L MCU_Microchip_ATmega:ATmega32U4-AU mcu1
+U 1 1 6067BB5F
+P 5700 4530
+F 0 "mcu1" H 5870 2750 50  0000 C CNN
+F 1 "ATmega32U4-AU" H 6090 2640 50  0000 C CNN
+F 2 "Package_QFP:TQFP-44_10x10mm_P0.8mm" H 5700 4530 50  0001 C CIN
+F 3 "http://ww1.microchip.com/downloads/en/DeviceDoc/Atmel-7766-8-bit-AVR-ATmega16U4-32U4_Datasheet.pdf" H 5700 4530 50  0001 C CNN
+	1    5700 4530
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:C C10
+U 1 1 608A4BF1
+P 5210 2110
+F 0 "C10" H 5325 2156 50  0000 L CNN
+F 1 "0.1u" H 5325 2065 50  0000 L CNN
+F 2 "Capacitor_SMD:C_0805_2012Metric_Pad1.18x1.45mm_HandSolder" H 5248 1960 50  0001 C CNN
+F 3 "~" H 5210 2110 50  0001 C CNN
+	1    5210 2110
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	5210 1960 5600 1960
+Wire Wire Line
+	5600 1960 5600 2730
+Text GLabel 5210 1960 1    50   Input ~ 0
+UVCC
+Wire Wire Line
+	3160 4540 3730 4540
+Wire Wire Line
+	3730 4640 3160 4640
+Wire Wire Line
+	4030 4640 4780 4640
+Wire Wire Line
+	4780 4640 4780 4130
+Wire Wire Line
+	4780 4130 5100 4130
+Wire Wire Line
+	5100 4030 4700 4030
+Wire Wire Line
+	4700 4030 4700 4540
+Wire Wire Line
+	4700 4540 4030 4540
+Text GLabel 4360 4130 3    50   Input ~ 0
+GND1
+Wire Wire Line
+	4150 3830 4360 3830
+Connection ~ 4360 3830
+Wire Wire Line
+	4360 3830 5100 3830
 $EndSCHEMATC

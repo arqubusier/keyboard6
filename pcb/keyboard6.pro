@@ -1,4 +1,4 @@
-update=Tue 16 Mar 2021 07:59:50 PM CET
+update=Thu 18 Mar 2021 08:02:43 PM CET
 version=1
 last_client=kicad
 [general]
@@ -229,6 +229,28 @@ Enabled=0
 Name=Default
 Clearance=0.4
 TrackWidth=0.25
+ViaDiameter=0.8
+ViaDrill=0.4
+uViaDiameter=0.3
+uViaDrill=0.1
+dPairWidth=0.2
+dPairGap=0.25
+dPairViaGap=0.25
+[pcbnew/Netclasses/1]
+Name=USB_FULL
+Clearance=0.127
+TrackWidth=0.25
+ViaDiameter=0.8
+ViaDrill=0.4
+uViaDiameter=0.3
+uViaDrill=0.1
+dPairWidth=0.5
+dPairGap=0.127
+dPairViaGap=0.25
+[pcbnew/Netclasses/2]
+Name=USB_PWR
+Clearance=0.4
+TrackWidth=0.3
 ViaDiameter=0.8
 ViaDrill=0.4
 uViaDiameter=0.3
