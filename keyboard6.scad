@@ -45,7 +45,7 @@ module switch_outer_2d() {
 }
 
 module switch_footprint(clearance=0) {
-  side = switch_side_inner+.4;
+  side = switch_side_inner+.8;
   square(side + clearance, center=true);
 }
 
@@ -677,14 +677,14 @@ module connector_assembly() {
 
 
 //mirror([1,0,0])
-union() {
+%union() {
   top_assembly();
   connector_assembly();
   plate_assembly();
   pcb();
 }
 
-//pcb_2d();
+pcb_2d();
 
 
 /*
