@@ -52,7 +52,7 @@ usbminib_data = [
   ["width", 7.7 + 2*1.1],
   ["width_pcb", 8.9 + 2],
   ["length", 5.5 + 2.95 + 1.5/2],
-  ["length_pcb", 9],
+  ["length_pcb", 9-.4],
   ["length_narrow", 2.95 - 1.5/2],
   ["width_narrow", 7.7],
   ["diameter", 5.6],
@@ -71,7 +71,7 @@ module usbminib_(data, clearance) {
     cube([wn, ln_ + 3, h]);
 }
 module usbminib(clearance=0) usbminib_(usbminib_data, clearance);
-module usbminib_pcb_2d(clearance) {
+module usbminib_pcb_2d(clearance=0) {
   square([get(usbminib_data, "width_pcb") + clearance, get(usbminib_data, "length_pcb") + clearance]);
 }
 
@@ -79,6 +79,7 @@ trrs_data = [
     ["height", 5],
     ["width", 8],
     ["width_pcb", 9],
+    ["width_footprint", 9+1.2],
     ["length", 12.1],
     ["length_pcb", 11.3 + 1.2/2],
     ["diameter", 5.6],
@@ -95,7 +96,7 @@ module trrs_(data, clearance) {
 }
 module trrs(clearance=0) trrs_(trrs_data, clearance);
 module trrs_pcb_2d(clearance) {
-  square([get(trrs_data, "width_pcb") + clearance, get(trrs_data, "length") + clearance]);
+  square([get(trrs_data, "width_footprint") + .6 + clearance, get(trrs_data, "length") + clearance]);
 }
 
 usbcable_data = [
