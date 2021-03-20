@@ -494,7 +494,7 @@ U 1 1 6067BB5F
 P 5700 4530
 F 0 "mcu1" H 5870 2750 50  0000 C CNN
 F 1 "ATmega32U4-AU" H 6090 2640 50  0000 C CNN
-F 2 "Package_QFP:TQFP-44_10x10mm_P0.8mm" H 5700 4530 50  0001 C CIN
+F 2 "keyboard6:QFP-44_10x10_Pitch0.8mm_Hand_solder" H 5700 4530 50  0001 C CIN
 F 3 "http://ww1.microchip.com/downloads/en/DeviceDoc/Atmel-7766-8-bit-AVR-ATmega16U4-32U4_Datasheet.pdf" H 5700 4530 50  0001 C CNN
 	1    5700 4530
 	1    0    0    -1  

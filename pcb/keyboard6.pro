@@ -1,4 +1,4 @@
-update=Thu 18 Mar 2021 08:02:43 PM CET
+update=Sat 20 Mar 2021 02:53:32 PM CET
 version=1
 last_client=kicad
 [general]
@@ -227,7 +227,7 @@ Enabled=0
 [pcbnew/Netclasses]
 [pcbnew/Netclasses/Default]
 Name=Default
-Clearance=0.4
+Clearance=0.2
 TrackWidth=0.25
 ViaDiameter=0.8
 ViaDrill=0.4
@@ -249,7 +249,7 @@ dPairGap=0.127
 dPairViaGap=0.25
 [pcbnew/Netclasses/2]
 Name=USB_PWR
-Clearance=0.4
+Clearance=0.2
 TrackWidth=0.3
 ViaDiameter=0.8
 ViaDrill=0.4
