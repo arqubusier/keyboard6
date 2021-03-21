@@ -200,7 +200,7 @@ L Device:C C1
 U 1 1 60983234
 P 3990 3230
 F 0 "C1" V 3830 3160 50  0000 C CNN
-F 1 "16p" V 3830 3310 50  0000 C CNN
+F 1 "32p" V 3830 3310 50  0000 C CNN
 F 2 "Capacitor_SMD:C_0805_2012Metric_Pad1.18x1.45mm_HandSolder" H 4028 3080 50  0001 C CNN
 F 3 "~" H 3990 3230 50  0001 C CNN
 	1    3990 3230
@@ -211,7 +211,7 @@ L Device:C C5
 U 1 1 60984579
 P 3990 3430
 F 0 "C5" V 4140 3360 50  0000 C CNN
-F 1 "16p" V 4140 3530 50  0000 C CNN
+F 1 "32p" V 4140 3530 50  0000 C CNN
 F 2 "Capacitor_SMD:C_0805_2012Metric_Pad1.18x1.45mm_HandSolder" H 4028 3280 50  0001 C CNN
 F 3 "~" H 3990 3430 50  0001 C CNN
 	1    3990 3430
@@ -379,7 +379,7 @@ Wire Wire Line
 Text GLabel 6170 1960 1    50   Input ~ 0
 UVCC
 Text Notes 6750 1990 0    50   ~ 0
-The double capacitors are for the hidden power pins.\nThese should be routed to the respective pins separately.
+The double bypass capacitors are for the hidden power pins.\nThese should be routed to the respective pins separately.
 Text GLabel 6620 2550 1    50   Input ~ 0
 UVCC
 Wire Wire Line
@@ -540,4 +540,6 @@ Connection ~ 4360 3830
 Wire Wire Line
 	4360 3830 5100 3830
 Connection ~ 2190 5230
+Text Notes 2790 2820 0    50   ~ 0
+Each crystal capacitor value was \ndetermined by the formula\nC = 2*CL – 2*Cstray\nCL is the crystal's load capacitance\nCstray is the parasitic capacitance\nthus,\nC = 2*20 - 2*4 = 32 [pF]
 $EndSCHEMATC
