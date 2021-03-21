@@ -133,7 +133,7 @@ F 3 "~" H 3160 3850 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 Wire Wire Line
-	2190 5220 2190 4040
+	2190 5230 2190 4040
 Wire Wire Line
 	1790 3910 1790 4040
 Wire Wire Line
@@ -539,4 +539,5 @@ Wire Wire Line
 Connection ~ 4360 3830
 Wire Wire Line
 	4360 3830 5100 3830
+Connection ~ 2190 5230
 $EndSCHEMATC

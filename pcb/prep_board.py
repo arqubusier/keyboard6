@@ -23,15 +23,18 @@ def place_switches(l):
         sw = 'SW' + str(n)
         sw_module = board.FindModuleByReference(sw)
         point = pcbnew.wxPoint(FromMM(x), FromMM(y))
-        sw_module.SetOrientationDegrees(0)
-        sw_module.SetPosition(point)
+        if (sw_module.IsFlipped()):
+            sw_module.SetPosition(point)
+        else:
+            sw_module.Flip(point)
+        sw_module.SetOrientationDegrees(180)
 
-        d_x = x - 2
+        d_x = x + 3.2
         d_y = y + 4
         d = 'D' + str(n)
         d_module = board.FindModuleByReference(d)
         point = pcbnew.wxPoint(FromMM(d_x), FromMM(d_y))
-        #d_module.SetOrientationDegrees(0)
+        d_module.SetOrientationDegrees(270)
         d_module.SetPosition(point)
 
         n += 1
@@ -45,12 +48,16 @@ def place_thumbs(l):
         module = board.FindModuleByReference(sw)
         point = pcbnew.wxPoint(FromMM(x), FromMM(y))
         module.SetPosition(point)
+        if (module.IsFlipped()):
+            module.SetPosition(point)
+        else:
+            module.Flip(point)
         n += 1
 
 def orient_thumbs(l):
     n = 27
     for match in re.findall(num, l):
-        angle = float(match)
+        angle = float(match) + 180
         sw = 'SW' + str(n)
         module = board.FindModuleByReference(sw)
         module.SetOrientationDegrees(angle)
