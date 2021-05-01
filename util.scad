@@ -32,3 +32,4 @@ function moveM(pos)
        [0, 0, 0, 1]];
 
 function vec3(vec) = [vec[0], vec[1], vec[2]];
+function vec2(vec) = [vec[0], vec[1]];

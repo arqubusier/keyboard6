@@ -44,7 +44,7 @@ module switch_neg_cube() {
         cube([switch_side_inner, switch_side_inner, switch_height], center=true);
 }
 
-module switch_neg(switch_height_mult) {
+module switch_neg(switch_height_mult=1) {
     translate([0,0,switch_height/2]) {
         difference() {
             cube([switch_side_inner, switch_side_inner, switch_height_mult*switch_height], center=true);
@@ -68,3 +68,9 @@ module switch(side_outer=switch_side_outer) {
 module keycap(center=true) {
   cube([18, 18, 8.5],center=center);
 }
+
+function switch_corner_outer(offset, corner) = offset +
+  ( (corner == "ne" ? [switch_side_outer/2, switch_side_outer/2, 0] :
+     (corner == "se" ? [switch_side_outer/2, -switch_side_outer/2, 0] :
+      (corner == "sw" ? [-switch_side_outer/2, -switch_side_outer/2, 0] :
+       ([-switch_side_outer/2, switch_side_outer/2, 0])))) );

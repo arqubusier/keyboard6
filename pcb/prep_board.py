@@ -3,7 +3,6 @@ from math import pi
 import re
 board = GetBoard()
 
-
 num = r'([-0-9.]+)'
 pos_regex = r'\s*'.join([r'\[', num, r',', num, r',', num])
 def place_connector(module_name, l):
@@ -63,22 +62,28 @@ def orient_thumbs(l):
         module.SetOrientationDegrees(angle)
         n += 1
 
+class Keyboard6Prep(pcbnew.ActionPlugin):
+    def defaults(self):
+        self.name = "Flip Board along a dimension and reference point."
+        self.category = "N/A"
+        self.description = "N/A"
 
-f = open("../positions.echo", "r")
-for l in  f:
-    type = l.split(',')[0]
-    print(l)
-    if "trrs" in type:
-        place_connector("J1", l)
-    elif "usbminib" in type:
-        place_connector("J2", l)
-    elif "switches" in type:
-        place_switches(l)
-    elif "thumb_angles" in type:
-        orient_thumbs(l)
-    elif "thumb_positions" in type:
-        place_thumbs(l)
+    def Run(self):
+        f = open("../positions.echo", "r")
+        for l in  f:
+            type = l.split(',')[0]
+            print(l)
+            if "trrs" in type:
+                place_connector("J1", l)
+            elif "usbminib" in type:
+                place_connector("J2", l)
+            elif "switches" in type:
+                place_switches(l)
+            elif "thumb_angles" in type:
+                orient_thumbs(l)
+            elif "thumb_positions" in type:
+                place_thumbs(l)
+        
+        f.close()
 
-f.close()
-
-Refresh()
+FlipBoard().register()

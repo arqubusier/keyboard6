@@ -7,6 +7,7 @@ include <misc.scad>
 		Common parameters
 
 /*****************************************************************************/
+$fn = 15;
 inner_height = 10;
 outer_height = inner_height + switch_height;
 
@@ -334,6 +335,130 @@ module full_pattern() {
 		Plate
 
 /*****************************************************************************/
+
+x_panel_min = -52;
+y_panel_max = Index2Pos(1)[1] - 1*switch_side_outer - 12;
+
+gons = [
+          [switch_corner_outer(Index2Pos(3), "nw")[0], y_panel_max] + [-2, 0, 0],
+          vec2(switch_corner_outer(Index2Pos(3), "nw") + [-2, -2, 0]),
+          vec2(switch_corner_outer(Index2Pos(8), "nw")),
+          vec2(switch_corner_outer(Index2Pos(13), "nw")),
+          vec2(switch_corner_outer(Index2Pos(13), "ne")),
+          vec2(switch_corner_outer(Index2Pos(18), "ne") + [2,0,0]),
+          vec2(switch_corner_outer(Index2Pos(22), "ne") + [2,0,0]),
+          vec2(switch_corner_outer(Index2Pos(24), "ne") + [2,0,0]),
+          vec2(switch_corner_outer(palm_switch_pos, "se") + [2,0,0]),
+          [thumb_position(2)[0], switch_corner_outer(palm_switch_pos, "se")[1]],
+          [x_panel_min, switch_corner_outer(palm_switch_pos, "ne")[1] -3],
+          [x_panel_min, y_panel_max]
+        ];
+
+insets_pos2 = [gons[0] + [0, 8, 0], gons[1], gons[5] + [5.5, -6, 0], gons[7], gons[8], gons[9], gons[11]];
+
+module insets2() {
+  for (pos = insets_pos2) {
+    translate(pos + z(plate_total_height))
+      children();
+  }
+}
+
+module plate_poly() {
+  polygon(points = gons);
+}
+//vec2(x(thumb_position(2)) + y(palm_switch_pos))
+module plate_poly3d() {
+    linear_extrude(.0001)
+      plate_poly();
+}
+
+module plate_poly_hull() {
+  minkowski() {
+    plate_poly3d();
+      children();
+  }
+}
+
+bottom_height = 2;
+bottom_clearance = .4;
+chamfer_h = 2;
+chamfer_r2 = 2;
+module bottom_clearance() {
+  translate([0, 0, -1])
+    plate_poly_hull()
+      cylinder(d=inset_diameter_outer - 0.8*2, h=bottom_height + plate_clearance + 1);
+}
+
+module bottom() {
+  difference() {
+    union () {
+      plate_poly_hull()
+        cylinder(d=inset_diameter_outer - 0.8*2 - plate_clearance, h=bottom_height);
+      #insets2()
+        screw_hole();
+
+      trrs_hole_bottom();
+      usbminib_hole_bottom();
+    }
+
+    connector_assembly(pcb_clearance);
+    insets2()
+      screw_hole();
+  }
+}
+
+module body_positive() {
+    union() {
+      translate([0, 0, outer_height - chamfer_h])
+        plate_poly_hull()
+          cylinder(r1=inset_diameter_outer/2, r2=chamfer_r2, h=chamfer_h);
+
+      plate_poly_hull()
+        cylinder(d=inset_diameter_outer, h=outer_height - chamfer_h);
+    }
+}
+
+module body_neg() {
+  translate([0, 0, -.1])
+    linear_extrude(inner_height + .1)
+      plate_poly();
+
+  pcb_with_clearance();
+  bottom_clearance();
+
+  trrs_hole();
+  usbminib_hole();
+  trrs_hole_bottom(pcb_clearance);
+  usbminib_hole_bottom(pcb_clearance);
+
+  translate([0, 0, inner_height]) {
+    #thumb_pattern()
+      switch_neg(1.1);
+    #main_pattern()
+      switch_neg(1.1);
+  }
+}
+
+
+!union() {
+  difference() {
+    union() {
+      difference() {
+        body_positive();
+        body_neg();
+      }
+      translate([0, 0, bottom_height + bottom_clearance])
+        insets2()
+          screw_inset_pos();
+    }
+    translate([0, 0, bottom_height + bottom_clearance])
+      insets2()
+        screw_inset_neg();
+  }
+
+  %connector_assembly();
+  %bottom();
+}
 
 module plate_outline(height) {
   corner = 0;
@@ -665,26 +790,26 @@ usbminib_footprint_pos = usbminib_pos +
             x(get(usbminib_data, "width_pcb")/2) +
   y(get(usbminib_data, "length_pcb"));
 
-module connector_assembly() {
+module connector_assembly(clearance=0) {
   translate(trrs_pos) {
-      trrs();
+      trrs(clearance);
   }
 
   translate(usbminib_pos){
-      usbminib();
+      usbminib(clearance);
   }
 }
 
 
-//mirror([1,0,0])
-%union() {
-  top_assembly();
-  connector_assembly();
-  plate_assembly();
-  pcb();
+mirror([1,0,0])
+union() {
+  %top_assembly();
+  %connector_assembly();
+  %plate_assembly();
+  %pcb();
+    
+  pcb_2d();
 }
-
-pcb_2d();
 
 
 /*
