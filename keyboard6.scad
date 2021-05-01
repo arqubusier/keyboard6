@@ -24,46 +24,6 @@ corner_diam_plate = inset_diameter_outer - plate_offset;
 corner_diam_plate_clearance = inset_diameter_outer - plate_offset + plate_clearance;
 plate_total_height = bottom_height + plate_clearance;
 
-module corner_outer_2d() {
-  circle(d=corner_diam_outer);
-}
-
-module corner_inner_2d() {
-  circle(d=corner_diam_inner);
-}
-
-module corner_plate_2d() {
-  circle(d=corner_diam_plate);
-}
-
-module corner_plate_clearance_2d() {
-  circle(d=corner_diam_plate_clearance);
-}
-
-module switch_outer_2d() {
-  side = switch_side_outline;
-  square(side, center=true);
-}
-
-module switch_footprint(clearance=0) {
-  side = switch_side_inner+.8;
-  square(side + clearance, center=true);
-}
-
-module switch_plate_2d() {
-  square(switch_side_outline - plate_offset , center=true);
-}
-
-module switch_plate_clearance_2d() {
-  square(switch_side_outline - plate_offset + plate_clearance , center=true);
-}
-
-module switch_outer() {
-  side = switch_side_inner + pcb_clearance + side_wall_thick;
-  translate([0, 0, switch_height/2])
-    cube([side, side, switch_height], center=true);
-}
-
 /******************************************************************************
 
 		Main Columns patterns
@@ -126,6 +86,16 @@ function Index2Pos(index) =
 function main_positions(i=0, n=n_switches) =
   (i == n)? [palm_switch_pos] : concat([Index2Pos(i)], main_positions(i+1, n));
 
+module main_pattern() {
+  rotate([0,0,0]) {
+      main()
+        children();
+
+      translate(palm_switch_pos)
+        children();
+   }
+}
+
 /******************************************************************************
 
 		Thumb Cluster patterns
@@ -161,7 +131,12 @@ module thumb_pattern(n=3) {
   }
 }
 
-          
+module full_pattern() {
+  main_pattern()
+    children();
+  thumb_pattern()
+    children();
+}
 
 /******************************************************************************
 
@@ -189,153 +164,6 @@ corners_pos = concat( insets_pos,
                       [[main_x_min, thumb_y_max,0]]
                        );
 
-module insets() {
-  for (pos = insets_pos) {
-    translate(pos + z(plate_total_height))
-      children();
-  }
-}
-
-module screws() {
-  for (pos = insets_pos) {
-    translate(pos)
-      children();
-  }
-}
-
-
-/******************************************************************************
-
-		Thumb Cluster Assembly
-
-/*****************************************************************************/
-module thumbs_extend() {
-  translate(corners_pos[0])
-    children();
-  translate(corners_pos[7])
-    children();
-  translate(corners_pos[6])
-    children();
-  translate(corners_pos[0] + [0,-20,0])
-    children();
-}
-
-module thumbs_body_top() {
-  translate([0,0,inner_height]) {
-    thumb_pattern()
-      children();
-  }
-}
-
-module thumb_holes() {
-  thumbs_body_top() {
-    switch_neg(5);
-  }
-}
-
-module thumb_body_inner() {
-  trim = 1;  
-  translate([0,0,-trim])
-    linear_extrude(height=inner_height + trim)
-      hull() {
-        thumb_pattern()
-          switch_footprint(pcb_clearance);
-        thumbs_extend()
-          corner_inner_2d();
-      }
-}
-
-module thumb_body_outer() {
-  linear_extrude(height=inner_height + switch_height)
-    hull() {
-      thumb_pattern()
-        switch_outer_2d();
-      thumbs_extend()
-        corner_outer_2d();
-    }
-}
-
-/******************************************************************************
-
-		Main Assembly
-
-/*****************************************************************************/
-module main_pattern() {
-  rotate([0,0,0]) {
-      main()
-        children();
-
-      translate(palm_switch_pos)
-        children();
-   }
-}
-
-module main_switches_outline() {
-  translate([0,0,inner_height])
-    main_pattern()
-    children();
-
-  main_pattern()
-  children();
-}
-module main_insets_bottom() {
-  for (pos = [corners_pos[1], corners_pos[2], corners_pos[3], corners_pos[4], corners_pos[5], corners_pos[6], corners_pos[7]] ) {
-    translate(pos) {
-      children();
-    }
-  }
-}
-
-module main_insets_outline() {
-  main_insets_bottom()
-    children();
-  translate([0,0,inner_height - inset_height_outer + switch_height])
-    main_insets_bottom()
-      children();
-}
-
-module main_outer() {
-  hull() {
-    main_switches_outline()
-      switch_outer();
-    main_insets_outline()
-      screw_inset_pos();
-  }
-
-}
-
-module main_inner() {
-  hull() {
-    linear_extrude(inner_height)
-      main_switches_outline()
-        switch_footprint(pcb_clearance);
-    translate([0, 0, -switch_height]) {
-      main_insets_outline()
-        cylinder(d=corner_diam_inner, h=inset_height_outer);
-    }
-  }
-}
-
-module main_holes() {
-  translate ([0, 0, inner_height]) {
-    main_pattern()
-      switch_neg(5);
-  }
-}
-
-module full_pattern() {
-  main_pattern()
-    children();
-  thumb_pattern()
-    children();
-}
-
-/******************************************************************************
-
-		Plate
-
-/*****************************************************************************/
-
 x_panel_min = -52;
 y_panel_max = Index2Pos(1)[1] - 1*switch_side_outer - 12;
 
@@ -356,12 +184,19 @@ gons = [
 
 insets_pos2 = [gons[0] + [0, 8, 0], gons[1], gons[5] + [5.5, -6, 0], gons[7], gons[8], gons[9], gons[11]];
 
-module insets2() {
+module insets() {
   for (pos = insets_pos2) {
     translate(pos + z(plate_total_height))
       children();
   }
 }
+
+
+/******************************************************************************
+
+		Plate
+
+/*****************************************************************************/
 
 module plate_poly() {
   polygon(points = gons);
@@ -394,7 +229,7 @@ module bottom() {
     union () {
       plate_poly_hull()
         cylinder(d=inset_diameter_outer - 0.8*2 - plate_clearance, h=bottom_height);
-      #insets2()
+      #insets()
         screw_hole();
 
       trrs_hole_bottom();
@@ -402,7 +237,7 @@ module bottom() {
     }
 
     connector_assembly(pcb_clearance);
-    insets2()
+    insets()
       screw_hole();
   }
 }
@@ -432,75 +267,11 @@ module body_neg() {
   usbminib_hole_bottom(pcb_clearance);
 
   translate([0, 0, inner_height]) {
-    #thumb_pattern()
-      switch_neg(1.1);
-    #main_pattern()
+    full_pattern()
       switch_neg(1.1);
   }
 }
 
-
-!union() {
-  difference() {
-    union() {
-      difference() {
-        body_positive();
-        body_neg();
-      }
-      translate([0, 0, bottom_height + bottom_clearance])
-        insets2()
-          screw_inset_pos();
-    }
-    translate([0, 0, bottom_height + bottom_clearance])
-      insets2()
-        screw_inset_neg();
-  }
-
-  %connector_assembly();
-  %bottom();
-}
-
-module plate_outline(height) {
-  corner = 0;
-  switch = 1;
-  difference() {
-    linear_extrude(height) {
-      union() {
-        hull() {
-          thumb_pattern()
-            children(switch);
-          thumbs_extend()
-            children(corner);
-        }
-        hull() {
-          main_pattern()
-            children(switch);
-
-            main_insets_bottom()
-            children(corner);
-          }
-        }
-    }
-  }
-}
-
-module plate() {
-  difference() {
-    plate_outline(bottom_height) {
-      corner_plate_2d();
-      switch_plate_2d();
-    }
-    screws()
-    screw_hole();
-  }
-}
-
-module plate_clearance() {
-  plate_outline(plate_total_height) {
-    corner_plate_clearance_2d();
-    switch_plate_clearance_2d();
-  }
-}
 /******************************************************************************
 
 		Dovetail
@@ -513,51 +284,67 @@ dove_tail_sw = [dove_tail_min_side/2, 0];
 dove_tail_ne = [dove_tail_max_side/2, dove_tail_depth];
 dove_tail_nw = [-dove_tail_max_side/2, dove_tail_depth];
 dove_tail_se = [-dove_tail_min_side/2, 0];
-dove_tail_height = inner_height+switch_height;
+dove_tail_height = 6;
 
-module dove_tail_2d() {
+module dove_tail_2d(clearance=0) {
   polygon([
-    dove_tail_nw, dove_tail_ne, dove_tail_sw, dove_tail_se 
+           dove_tail_nw + [-clearance, clearance],
+           dove_tail_ne + [clearance, clearance],
+           dove_tail_sw + [clearance, -clearance],
+           dove_tail_se + [-clearance, -clearance] 
   ]);
 }
 
-dove_tail_pos = [(insets_pos[5][0]+insets_pos[6][0])/2,insets_y_min - inset_diameter_outer/2+.1,0];
-module dove_tail() {
+dove_tail_pos =  [(gons[8][0] + gons[9][0])/2, gons[8][1] -inset_diameter_outer/2 + .1, 0];
+
+module dove_tail_chamfer(w, pos) {
+    translate(pos) {
+      rotate([0,0,45])
+      cube([w, w, dove_tail_height], center=true);
+    }
+}
+
+module dove_tail(clearance=0) {
+  slant_side = dove_tail_max_side;
+  slant_hyp = sqrt(2*slant_side*slant_side);
   translate(dove_tail_pos) {
-    linear_extrude(height=dove_tail_height) {
-      rotate([0,0,180]){
-        children();
+    difference() {
+      linear_extrude(height=dove_tail_height) {
+        rotate([0,0,180]){
+          dove_tail_2d(clearance);
+        }
       }
+      translate([0, -slant_hyp/2, dove_tail_height + clearance])
+        rotate([45, 0, 0])
+          cube(slant_side, center=true);
     }
   }
 }
 
+module dove_tail_positive() {
+  difference() {
+    dove_tail(0.1);
+    dove_tail_chamfer2(2);
+  }
+}
+
+module dove_tail_neg() {
+  dove_tail();
+  dove_tail_chamfer1(2);
+}
+
 module dove_tail_chamfer1(w) {
   translate(dove_tail_pos + [0, 0, dove_tail_height/2]) {
-    translate(dove_tail_se) {
-      rotate([0,0,45])
-      cube([w, w, dove_tail_height], center=true);
-    }
-
-    translate(dove_tail_sw) {
-      rotate([0,0,45])
-      cube([w, w, dove_tail_height], center=true);
-    }
+    dove_tail_chamfer(w, dove_tail_se);
+    dove_tail_chamfer(w, dove_tail_sw);
   }
 }
 
 module dove_tail_chamfer2(w) {
   translate(dove_tail_pos + [0, 0, dove_tail_height/2]) {
     rotate([0,0,180]) {
-      translate(dove_tail_ne) {
-        rotate([0,0,45])
-        cube([w, w, dove_tail_height], center=true);
-      }
- 
-      translate(dove_tail_nw) {
-        rotate([0,0,45])
-        cube([w, w, dove_tail_height], center=true);
-      }
+      dove_tail_chamfer(w, dove_tail_ne);
+      dove_tail_chamfer(w, dove_tail_nw);
     }
   }
 }
@@ -568,52 +355,32 @@ module dove_tail_chamfer2(w) {
 		hand rest
 
 /*****************************************************************************/
+hand_rest_depth = 70;
+hand_rest_gons = [
+                  gons[8],
+                  gons[9],
+                  gons[9] + [gons[3][0], -hand_rest_depth, 0],
+                  gons[8] + [0, -hand_rest_depth, 0],
+                  ];
+module hand_rest_hull() {
+    minkowski() {
+      linear_extrude(0.0001)
+        polygon(hand_rest_gons);
+      children();
+    }
+}
 module hand_rest() {
-  corner_diam = 7;
-
-  depth = 70;
-  ne =  insets_pos[5] + [switch_side_outer, -inset_diameter_outer - .2, 0];
-  nw =  insets_pos[6] + [-5, -inset_diameter_outer - .2, 0];
-  w =  nw + [0, -30, 0];
-  sw = nw + [25, -depth, 0];
-  se = ne + [0, -depth, 0];
-
   difference() {
-    //linear_extrude(inner_height + switch_height + bottom_height)
-    hull() {
-      linear_extrude(1) {
-        hull()
-          for (pos = [ne, nw, w, sw, se]) {
-            translate(pos)
-              circle(d=corner_diam);
-          }
-      }
-      translate([0, 0, inner_height + switch_height + bottom_height - corner_diam]) {
-        translate(nw) {
-          cylinder(d=corner_diam, h=corner_diam);
-        }
-        translate(ne) {
-          cylinder(d=corner_diam, h=corner_diam);
-        }
-        translate(w) {
-          cylinder(d=corner_diam, h=corner_diam);
-        }
-        translate(se + [0,0,corner_diam/2]) {
-          sphere(d=corner_diam);
-        }
-        translate(sw + [0,0,corner_diam/2]) {
-          sphere(d=corner_diam);
-        }
-      }
-    }
-    
+    translate([0, -inset_diameter_outer, 0]) {
+      hand_rest_hull()
+        cylinder(d=inset_diameter_outer, h=outer_height-chamfer_h);
 
-    translate([0,0,bottom_height]) {
-      dove_tail()
-        scale([1.05,1.05,1])
-          dove_tail_2d();
-      dove_tail_chamfer1(3);
+      translate([0, 0, outer_height-chamfer_h])
+        hand_rest_hull()
+        cylinder(r1=inset_diameter_outer/2, r2=chamfer_r2, , h=chamfer_h);
     }
+
+    #dove_tail_neg();
   }
 }
 
@@ -645,6 +412,11 @@ module controller_2d(clearance) {
 }
 
 corner_pcb_pos = [Index2Pos(0)[0] - switch_side_inner/2, trrs_pos[1],0];
+
+module switch_footprint(clearance=0) {
+  side = switch_side_inner+.8;
+  square(side + clearance, center=true);
+}
 
 module pcb_2d(clearance=0) {
   hull() {
@@ -728,61 +500,6 @@ module trrs_hole_bottom(clearance=0) {
 
 /*****************************************************************************/
 
-module top_positive() {
-  union() {
-    difference() {
-      union(){
-        thumb_body_outer();
-        main_outer();
-      }
-      thumb_body_inner();
-      main_inner();
-    }
-
-    insets()
-      screw_inset_pos();
-
-    difference() {
-      dove_tail()
-        dove_tail_2d();
-      dove_tail_chamfer2(1);
-    }
-  }
-}
-
-module plate_assembly() {
-  difference() {
-    union() {
-      plate();
-        trrs_hole_bottom();
-        usbminib_hole_bottom();
-    }
-    trrs_hole();
-    usbminib_hole();
-  }
-}
-
-module top_assembly() {
-  difference() {
-    top_positive();
-  
-    main_holes();
-    thumb_holes();
-  
-    insets(){
-        screw_inset_neg();
-    }
-  
-  plate_clearance();
-  pcb_with_clearance();
-  
-  trrs_hole();
-  usbminib_hole();
-  trrs_hole_bottom(pcb_clearance);
-  usbminib_hole_bottom(pcb_clearance);
-  }
-}
-
 trrs_footprint_pos = trrs_pos +
             x(get(trrs_data, "width_pcb")/2) +
   y(get(trrs_data, "length"));
@@ -801,16 +518,29 @@ module connector_assembly(clearance=0) {
 }
 
 
-mirror([1,0,0])
 union() {
-  %top_assembly();
-  %connector_assembly();
-  %plate_assembly();
-  %pcb();
-    
-  pcb_2d();
-}
+  difference() {
+    union() {
+      difference() {
+        body_positive();
+        body_neg();
+      }
+      translate([0, 0, bottom_height + bottom_clearance])
+        insets()
+          screw_inset_pos();
+    }
+    translate([0, 0, bottom_height + bottom_clearance])
+      insets()
+        screw_inset_neg();
+  }
 
+  hand_rest();
+
+  #dove_tail_positive();
+  %connector_assembly();
+  %bottom();
+  %pcb();
+}
 
 /*
 %projection()
